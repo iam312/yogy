@@ -1,0 +1,13 @@
+development: &development
+  adapter: mysql2
+  database: yogy_development
+  username: root
+  password: 
+  host: localhost
+
+test:
+  <<: *development
+
+production:
+  <<: *development
+
