@@ -4,6 +4,7 @@ gem 'rails', '~>4'
 gem 'mysql2'
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'carrierwave'
 
 group :development do
   gem 'debugger'

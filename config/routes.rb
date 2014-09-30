@@ -1,13 +1,21 @@
 Rails.application.routes.draw do
-  get 'images/create'
+  get 'images/index'
 
-  get 'images/edit'
+  get 'images/new'
 
-  get 'images/update'
+  post 'images/create'
 
-  get 'images/show'
+  get 'images/destroy'
 
-  get 'images/delete'
+  get 'yogy/create'
+
+  get 'yogy/edit'
+
+  get 'yogy/update'
+
+  get 'yogy/show'
+
+  get 'yogy/delete'
 
   get 'users/create'
 

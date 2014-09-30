@@ -1,9 +1,9 @@
-class CreateImages < ActiveRecord::Migration
+class CreateYogies < ActiveRecord::Migration
   def change
-    create_table :images do |t|
+    create_table :yogies do |t|
       t.string :title
       t.integer :user_id
-      t.string :path
+      t.text :desc
 
       t.timestamps
     end

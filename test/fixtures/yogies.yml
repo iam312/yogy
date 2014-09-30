@@ -2,10 +2,10 @@
 
 one:
   title: MyString
-  yogy_id: 1
-  asset: MyString
+  user_id: 1
+  desc: MyText
 
 two:
   title: MyString
-  yogy_id: 1
-  asset: MyString
+  user_id: 1
+  desc: MyText
