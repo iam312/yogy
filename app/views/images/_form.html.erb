@@ -10,6 +10,7 @@
 
 <div class="well">
   <%= form_for @image, html: { multipart: true }, :url => images_create_path, :method => :post do |f| %>
+    <%= f.hidden_field :yogy_id, :value=>params[:yogy_id] %>
     <%= f.label :title %>
     <%= f.text_field :title %>
     <%= f.label :asset %>

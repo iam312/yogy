@@ -13,25 +13,25 @@
 
 ActiveRecord::Schema.define(version: 20140930143916) do
 
-  create_table "images", force: true do |t|
-    t.string   "title"
-    t.integer  "yogy_id"
-    t.string   "asset"
+  create_table "images", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.integer  "yogy_id",    limit: 4
+    t.string   "asset",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "email"
-    t.boolean  "enabled"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",      limit: 255
+    t.boolean  "enabled",    limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "yogies", force: true do |t|
-    t.string   "title"
-    t.integer  "user_id"
-    t.text     "desc"
+  create_table "yogies", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.integer  "user_id",    limit: 4
+    t.text     "desc",       limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
   end
