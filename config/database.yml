@@ -1,13 +1,19 @@
 development: &development
   adapter: mysql2
-  database: yogy_development
+  host: localhost
   username: root
   password: 
-  host: localhost
+  database: yogy_development
 
 test:
   <<: *development
+  database: yogy_test
 
 production:
   <<: *development
+  adapter: postgresql
+  host: ec2-54-225-102-235.compute-1.amazonaws.com
+  username: ewhykzuormoyuu
+  password: B3RHv60dicbvwJSrat10BqjoVi
+  database: dda9ijld6tulgs
 

@@ -17,15 +17,15 @@ Rails.application.routes.draw do
 
   get 'yogy/delete'
 
-  get 'users/create'
-
-  post 'users/edit'
-
-  post 'users/update'
-
-  get 'users/show'
-
-  get 'users/delete'
+#  get 'users/create'
+#
+#  post 'users/edit'
+#
+#  post 'users/update'
+#
+#  get 'users/show'
+#
+#  get 'users/delete'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

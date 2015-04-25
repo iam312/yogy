@@ -1,6 +1,9 @@
-<%= form_for @user, url: {action: "update"} do |f| %>
-  <%= f.text_field :email %>
-  <%= f.hidden_field :enabled, :value => 1 %>
-  <input name="users[enabled]" type="hidden" value=1 />
-  <%= f.submit "Create" %>
-<% end %>
+<div class="text-field">
+  <%= form.label :email %>
+  <%= form.text_field :email, type: 'email' %>
+</div>
+
+<div class="password-field">
+  <%= form.label :password %>
+  <%= form.password_field :password %>
+</div>

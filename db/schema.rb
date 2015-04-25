@@ -11,27 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140930143916) do
+ActiveRecord::Schema.define(version: 20150310044220) do
 
-  create_table "images", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.integer  "yogy_id",    limit: 4
-    t.string   "asset",      limit: 255
+  create_table "images", force: true do |t|
+    t.string   "title"
+    t.integer  "yogy_id"
+    t.string   "asset"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "email",      limit: 255
-    t.boolean  "enabled",    limit: 1
+  create_table "users", force: true do |t|
+    t.string   "email"
+    t.boolean  "enabled"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "encrypted_password", limit: 128
+    t.string   "confirmation_token", limit: 128
+    t.string   "remember_token",     limit: 128
   end
 
-  create_table "yogies", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.integer  "user_id",    limit: 4
-    t.text     "desc",       limit: 65535
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+
+  create_table "yogies", force: true do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.text     "desc"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
