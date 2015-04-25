@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.4'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
-gem 'sass-rails'
+gem 'sass-rails', '~>5.0.2'
 gem 'uglifier'
 gem 'coffee-rails'
 
