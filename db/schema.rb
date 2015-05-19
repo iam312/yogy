@@ -15,8 +15,9 @@ ActiveRecord::Schema.define(version: 20150310044220) do
 
   create_table "images", force: true do |t|
     t.string   "title"
-    t.integer  "yogy_id"
+    t.integer  "user_id"
     t.string   "asset"
+    t.text     "desc"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

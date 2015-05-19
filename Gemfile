@@ -10,6 +10,7 @@ gem 'puma'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'carrierwave'
+gem 'rmagick'
 gem 'clearance'
 
 group :development, :test do

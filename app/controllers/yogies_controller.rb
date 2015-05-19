@@ -1,5 +1,5 @@
-class YogyController < ApplicationController
-  def create
+class YogiesController < ApplicationController
+  def new 
     @yogy = Yogies.new
   end
 

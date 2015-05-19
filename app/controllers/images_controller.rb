@@ -3,14 +3,15 @@ class ImagesController < ApplicationController
   end
 
   def new
-    @image = Images.new
+    @image = Image.new
   end
 
   def create
-    @image = Images.new(image_params)
+    @image = Image.new(image_params)
+    @image.user_id = current_user.id
 
     if @image.save
-      redirect_to images_index_path, notice: "The image #{@image.title} has been uploaded."
+      redirect_to image_path({id: @image.id }), notice: "The image #{@image.title} has been uploaded."
     else
       render "new"
     end
@@ -19,10 +20,14 @@ class ImagesController < ApplicationController
   def destroy
   end
 
+  def show
+    @image = Image.find_by_id( params[:id] )
+  end
+
 
   private
 
   def image_params
-    params.require(:images).permit(:title, :asset, :yogy_id)
+    params.require(:image).permit(:title, :asset, :user_id)
   end
 end

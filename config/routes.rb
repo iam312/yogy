@@ -1,21 +1,27 @@
 Rails.application.routes.draw do
-  get 'images/index'
+#  get 'images/index'
+#
+#  get 'images/new'
+#
+#  post 'images/create'
+#
+#  get 'images/destroy'
 
-  get 'images/new'
+  resources 'images' do
+  end
 
-  post 'images/create'
+  resources 'yogy' do
+  end
 
-  get 'images/destroy'
 
-  get 'yogy/create'
+  root to: 'images#new'
 
-  get 'yogy/edit'
-
-  get 'yogy/update'
-
-  get 'yogy/show'
-
-  get 'yogy/delete'
+#  get 'yogies/index'
+#  get 'yogies/create'
+#  get 'yogies/edit'
+#  get 'yogies/update'
+#  get 'yogies/show'
+#  get 'yogies/delete'
 
 #  get 'users/create'
 #
