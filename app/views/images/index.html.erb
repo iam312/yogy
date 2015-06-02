@@ -1,2 +1,6 @@
 <h1>Images#index</h1>
-<p>Find me in app/views/images/index.html.erb</p>
+<% @images.each do |image| %>
+  <%= link_to image.title, image_path( image ) %> <br/> 
+<% end %>
+<hr />
+<%= link_to t('.new'), new_image_path, class: "btn btn-primary" %> 

@@ -1,10 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.4'
-gem 'sprockets-rails', :require => 'sprockets/railtie'
-gem 'sass-rails', '~>5.0.2'
-gem 'uglifier'
-gem 'coffee-rails'
+#gem 'rails', '4.1.4'
+gem 'rails', '4.1.7'
+gem 'andand'
 
 gem 'puma'
 gem 'jquery-rails'
@@ -12,6 +10,8 @@ gem 'turbolinks'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'clearance'
+gem 'bootstrap-sass'
+gem 'sass-rails'
 
 group :development, :test do
   gem 'mysql2'
