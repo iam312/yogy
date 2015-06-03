@@ -12,6 +12,7 @@ gem 'rmagick'
 gem 'clearance'
 gem 'bootstrap-sass'
 gem 'sass-rails'
+gem 'uglifier'
 
 group :development, :test do
   gem 'mysql2'
