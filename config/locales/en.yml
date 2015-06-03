@@ -24,3 +24,6 @@ en:
   images:
     show:
       new: 'new'
+  gnb:
+    image_list: 'Image List'
+    new_image: 'New Image'

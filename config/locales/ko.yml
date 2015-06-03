@@ -2,3 +2,6 @@ ko:
   images:
     show:
       new: '신규'
+  gnb:
+    image_list: '이미지 목록'
+    new_image: '이미지 등록'
