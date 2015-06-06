@@ -32,7 +32,6 @@ GEM
     autoprefixer-rails (5.2.0)
       execjs
       json
-    bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -50,10 +49,6 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
-    clearance (1.9.0)
-      bcrypt
-      email_validator (~> 1.4)
-      rails (>= 3.1)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -65,8 +60,6 @@ GEM
     columnize (0.9.0)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
-    email_validator (1.5.0)
-      activemodel
     erubis (2.7.0)
     execjs (2.5.2)
     hike (1.2.3)
@@ -166,7 +159,6 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   carrierwave
-  clearance
   jquery-rails
   mysql2
   pg

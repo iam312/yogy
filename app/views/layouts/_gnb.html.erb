@@ -113,11 +113,8 @@
         </li>
         <li>
           <span id="header">
-            <% if signed_in? %>
-              <%= button_to t('layouts.application.sign_out'), sign_out_path, method: :delete, class: "btn btn-primary btn-xs navbar-btn" %>
-            <% else %>
-              <%= link_to t('layouts.application.sign_in'), sign_in_path, class: "btn btn-primary btn-xs navbar-btn" %>
-            <% end %>
+              <%= button_to t('layouts.application.sign_out'), '', method: :delete, class: "btn btn-primary btn-xs navbar-btn" %>
+              <%= link_to t('layouts.application.sign_in'), '', class: "btn btn-primary btn-xs navbar-btn" %>
           </span>
         </li>
       </ul>
