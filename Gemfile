@@ -3,14 +3,18 @@ source 'https://rubygems.org'
 #gem 'rails', '4.1.4'
 gem 'rails', '4.1.7'
 gem 'puma'
-
 gem 'andand'
+gem 'delayed_job_active_record'
+
+# 이미지 처리
 gem 'carrierwave'
 gem 'rmagick'
 
+# 회원 인증
 gem 'devise'
 gem 'omniauth-facebook'
 
+# front-end
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'bootstrap-sass'

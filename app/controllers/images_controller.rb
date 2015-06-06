@@ -1,4 +1,6 @@
 class ImagesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :destroy]
+
   def index
     @images = Image.all
   end
@@ -11,11 +13,16 @@ class ImagesController < ApplicationController
     @image = Image.new(image_params)
     @image.user_id = current_user.id
 
-    if @image.save
-      redirect_to image_path({id: @image.id }), notice: "The image #{@image.title} has been uploaded."
-    else
+    begin
+      @image.transaction do
+binding.pry
+        @image.save
+      end
+    rescue
       render "new"
+      return
     end
+    redirect_to image_path({id: @image.id }), notice: "The image #{@image.title} has been uploaded."
   end
 
   def destroy
@@ -29,6 +36,6 @@ class ImagesController < ApplicationController
   private
 
   def image_params
-    params.require(:image).permit(:title, :asset, :user_id)
+    params.require(:image).permit!
   end
 end

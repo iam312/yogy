@@ -5,11 +5,14 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tag %>
 </head>
-<body>
+<body class="container">
   <%= render "layouts/gnb" %>
   <div id="flash">
-    <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"><%=h value %></div>
+    <% flash.each do |key, value| %>
+      <div id="flash_<%= key %>" class="alert alert-<%= alert_devise_to_bootstrap( key ) %> alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%=h value %>
+      </div>
     <% end %>
   </div>
 

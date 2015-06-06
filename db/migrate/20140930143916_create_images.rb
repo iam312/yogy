@@ -4,6 +4,7 @@ class CreateImages < ActiveRecord::Migration
       t.string :title
       t.integer :user_id
       t.string :asset
+      t.string :yogies
       t.text :desc
       t.timestamps
     end

@@ -8,13 +8,23 @@
   </div>
 <% end %>
 
-<div class="well">
-  <%= form_for @image, html: { multipart: true } do |f| %>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-    <%= f.label :asset %>
-    <%= f.file_field :asset %>
-    <%= f.submit "Save", class: "btn btn-primary" %>
-  <% end %>
+<div class="jumbotron">
+    <%= form_for @image, html: { multipart: true } do |f| %>
+      <div class="input-group">
+      <%= f.label :title, class: "input-group-addon" %>
+      <%= f.text_field :title, class: "form-control" %>
+      </div>
+      <div class="input-group">
+      <%= f.label :Yogies, class: "input-group-addon" %>
+      <%= f.text_field :yogies, class: "form-control" %>
+      </div>
+      <br />
+      <div class="input-group">
+        <%= f.file_field :asset, class: "form-control" %>
+        <span class="input-group-btn">
+          <%= f.submit "Save", class: "btn btn-primary" %>
+        </span>
+      </div>
+    <% end %>
+  </div>
 </div>
-
