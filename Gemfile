@@ -2,13 +2,17 @@ source 'https://rubygems.org'
 
 #gem 'rails', '4.1.4'
 gem 'rails', '4.1.7'
-gem 'andand'
-
 gem 'puma'
-gem 'jquery-rails'
-gem 'turbolinks'
+
+gem 'andand'
 gem 'carrierwave'
 gem 'rmagick'
+
+gem 'devise'
+gem 'omniauth-facebook'
+
+gem 'jquery-rails'
+gem 'turbolinks'
 gem 'bootstrap-sass'
 gem 'sass-rails'
 gem 'uglifier'
