@@ -30,13 +30,13 @@
 <meta property="og:title" content="<%= @image.title %>" />
 <meta property="og:site_name" content="Yogy"/>
 <meta property="og:url" content="<%= request.url %>" />
-<meta property="og:description" content="<%= @image.desc %>" />
+<meta property="og:description" content="<%= @image.desc.gsub("\n", " ") %>" />
 <meta property="fb:app_id" content="1435050833470506" />
 <meta property="og:type" content="article" />
-<meta property="og:locale" content="en_US" />
-<meta property="og:locale:alternate" content="ko_KR" />
+<meta property="og:locale" content="ko_KR" />
+<meta property="og:locale:alternate" content="en_US" />
 <meta property="article:author" content="<%= @image.user.name %>" />
-<meta property="article:publisher" content="http://yogy.co.kr" />
+<meta property="article:publisher" content="<%= @image.user.name %>" />
 <% end %>
 
 <div class="jumbotron">
