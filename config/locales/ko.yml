@@ -1,7 +1,15 @@
 ko:
   images:
+    new:
+      title: '제목'
+      desc: '설명'
+      yogies: 'Yogy'
+      save: '설명'
     show:
       new: '신규'
   gnb:
     image_list: '이미지 목록'
     new_image: '이미지 등록'
+
+  error:
+    fail_to_regist_image: '이미지를 등록하지 못했습니다.'

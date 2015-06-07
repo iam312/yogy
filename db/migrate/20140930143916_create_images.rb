@@ -6,6 +6,9 @@ class CreateImages < ActiveRecord::Migration
       t.string :asset
       t.string :yogies
       t.text :desc
+      t.text :yogy_ids
+      t.integer :like
+      t.integer :dislike
       t.timestamps
     end
   end

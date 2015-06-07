@@ -22,8 +22,16 @@
 en:
   hello: "Hello world"
   images:
+    new:
+      title: 'title'
+      desc: 'description'
+      yogies: 'Yogy'
+      save: 'Save'
     show:
       new: 'new'
   gnb:
     image_list: 'Image List'
     new_image: 'New Image'
+
+  error:
+    fail_to_regist_image: 'Failed to regist image.'
