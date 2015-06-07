@@ -18,8 +18,8 @@ class ImagesController < ApplicationController
       @image.transaction do
         @image.save
 
-        @image.delay.process!( current_user )
-        #@image.process!( current_user )
+        #@image.delay.process!( current_user )
+        @image.process!( current_user )
       end
     rescue => e
       Rails.logger.error e
