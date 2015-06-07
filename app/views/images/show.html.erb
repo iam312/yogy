@@ -40,10 +40,10 @@
 <% end %>
 
 <div class="jumbotron">
-  <h1><%= @image.title %></h1>
+  <h2><%= @image.title %> <small><%= @image.yogies %></small></h2>
   <p><%= image_tag(@image.asset.url) %></p>
-  <p><%= @image.desc %></p>
-  <small><%= @image.created_at %></small>
+  <h4><%= @image.user.name %> <small><%= @image.created_at %></small></h4>
+  <quote><%= @image.desc %></quote>
 </div>
 
 <div
