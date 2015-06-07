@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   resources 'yogy' do
   end
 
-  root to: 'images#new'
+  root to: 'yogy#index'
 end
