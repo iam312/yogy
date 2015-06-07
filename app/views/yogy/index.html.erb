@@ -5,9 +5,26 @@
     <p><%= image_tag(yogy[:images].first.asset.url) %></p>
 </a>
     <p><%= yogy[:images].first.desc %></p>
-    <% yogy[:images].each do |image| %>
-    <h4><%= image.user.name %> <small><%= image.created_at %></small></h4>
+<% if yogy[:images].size > 1 %>
+    <br />
+    <hr />
+    <br />
+<% end %>
+<div class="row">
+    <% yogy[:images].drop(1).each do |image| %>
+  <a href="<%= image_path( image ) %>">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <%= image_tag(image.asset.url) %>
+      <div class="caption">
+        <h3><%= image.title %></h3>
+        <h4><%= image.user.name %> <small><%= image.created_at %></small></h4>
+      </div>
+    </div>
+  </div>
+  </a>
     <% end %>
+</div>
     <% if yogy[:count].to_i > yogy[:images].count %>
       :<br/>
       :<br/>

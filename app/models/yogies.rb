@@ -9,8 +9,8 @@ class Yogies < ActiveRecord::Base
       title = yogy[0]
       count = yogy[1]
 
-      # 최적 이미지 3개 추출, 지금은 최신 순
-      best_image_ids = Yogies.where( { title: title } ).order( 'created_at desc' ).limit(3).map{ |yogy| yogy.image_id }
+      # 최적 이미지 4개 추출, 지금은 최신 순
+      best_image_ids = Yogies.where( { title: title } ).order( 'created_at desc' ).limit(4).map{ |yogy| yogy.image_id }
 
       result << { title: title,
         count: count,
