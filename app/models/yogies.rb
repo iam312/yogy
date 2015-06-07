@@ -10,12 +10,11 @@ class Yogies < ActiveRecord::Base
       count = yogy[1]
 
       # 최적 이미지 3개 추출, 지금은 최신 순
-      best_yogies = Yogies.where( { title: title } ).order( 'created_at desc' ).limit(3)
       best_image_ids = Yogies.where( { title: title } ).order( 'created_at desc' ).limit(3).map{ |yogy| yogy.image_id }
 
       result << { title: title,
         count: count,
-        images: Image.find(best_image_ids)
+        images: Image.where( { id: best_image_ids } ).order( 'created_at desc' )
       }
     end
 
