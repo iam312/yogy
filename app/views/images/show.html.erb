@@ -26,6 +26,19 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
+<% content_for :head do %>
+<meta property="og:title" content="<%= @image.title %>" />
+<meta property="og:site_name" content="Yogy"/>
+<meta property="og:url" content="<%= request.url %>" />
+<meta property="og:description" content="<%= @image.desc %>" />
+<meta property="fb:app_id" content="1435050833470506" />
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:locale:alternate" content="ko_KR" />
+<meta property="article:author" content="<%= @image.user.name %>" />
+<meta property="article:publisher" content="http://yogy.co.kr" />
+<% end %>
+
 <div class="jumbotron">
   <h1><%= @image.title %></h1>
   <p><%= image_tag(@image.asset.url) %></p>
