@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '~>4.1.7'
 gem 'puma'
 gem 'andand'
+gem 'figaro'
 
 # delayed_job
 gem 'delayed_job_active_record'
@@ -12,6 +13,8 @@ gem 'daemons'
 # 이미지 처리
 gem 'carrierwave'
 gem 'rmagick'
+gem 'aws-sdk', '~> 1.36.1'
+gem 'fog'
 
 # 회원 인증
 gem 'devise'

@@ -14,7 +14,7 @@ class ImagesController < ApplicationController
     @image.user_id = current_user.id
 
     begin
-      raise ::Yogy::Exceptions::ImageInvalid.new "image is not setted." if image_params[:asset].blank?
+      raise ::Yogy::Exceptions::ImageInvalid.new "image is not setted." if image_params[:s3].blank?
       @image.transaction do
         @image.save
 

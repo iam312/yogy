@@ -4,7 +4,7 @@
         <small><%= yogy[:images].first.title %></small>
     </h2>
 <a href="<%= image_path( yogy[:images].first ) %>">
-    <p><%= image_tag(yogy[:images].first.asset.url) %></p>
+    <p><%= image_tag(yogy[:images].first.s3.url) %></p>
 </a>
     <h4><%= yogy[:images].first.user.name %> <small><%= yogy[:images].first.created_at %></small></h4>
     <quote><%= yogy[:images].first.desc %></quote>
@@ -18,7 +18,7 @@
     <a href="<%= image_path( image ) %>">
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <%= image_tag(image.asset.url) %>
+          <%= image_tag(image.s3.url) %>
           <div class="caption">
             <h3><%= image.title %></h3>
             <h4><%= image.user.name %> <small><%= image.created_at %></small></h4>
