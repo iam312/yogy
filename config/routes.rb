@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources 'yogy' do
   end
+  get 'about', to: 'yogy#about'
 
   root to: 'yogy#index'
 end

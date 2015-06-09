@@ -19,4 +19,7 @@ class YogyController < ApplicationController
 
   def delete
   end
+
+  def about
+  end
 end
