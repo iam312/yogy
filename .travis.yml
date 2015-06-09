@@ -5,3 +5,9 @@ cache: bundler
 script:
   - RAILS_ENV=test bundle exec rake db:create db:migrate --trace
   - bundle exec rake spec
+
+env:
+  global:
+    - secure: "BzZdLreEKXDN7Aylqe7OvEjgZCnBwOvtrCVvRpp3XV1Bg1iZeMrCYV9NmIhj6Lhu29o6WIrO73Eai+UGSpCTabvBbIezatT56ugCb1u+rVkfQfLgUK4IKoHgndDEykavDUMLFX9ijXkh+IPUag16HS8l8MxVDeuLS4vrbryReRo="
+    - secure: "Qyjh8uA/66TmNsomgJoOOYFgEvU214rPC55EQB+/FGcu4qgwGNSkNz2juOHeEkhHbKL3N8G8LgaQMFJ4qDetAEpoj5+Q5B+3fhlGE1K3jPHWVlY33xm70RHq1BM4juR/9FcGV+BHODbnvDAfDa8HAETTFO8c8XeXdMk0NBD2CX0="
+    - secure: "FL+9M+IKpAE7pSIBBDq3anm8DWNea8uSpYqALHzrEby369XJqPkbH7onIN3Alsx4uKR1GTs1E1YnlcUUJ+gAdKCye8YjW6gjzeGbAtonovVK183l5YOfPk+iD7/Q4Ipkn0TakSvuUKDa7dHdpzeKVEqc5jZqZsZmNWcKBqDJamw="
