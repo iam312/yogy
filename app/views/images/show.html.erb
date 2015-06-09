@@ -6,7 +6,7 @@
   }
   window.fbAsyncInit = function() {
   FB.init({
-    appId      : '1435050833470506',
+    appId      : '<%= ENV["FB_APP_ID"] %>',
     cookie     : true,  // enable cookies to allow the server to access 
                         // the session
     xfbml      : true,  // parse social plugins on this page
@@ -31,7 +31,7 @@
 <meta property="og:site_name" content="Yogy"/>
 <meta property="og:url" content="<%= request.url %>" />
 <meta property="og:description" content="<%= @image.desc.gsub("\n", " ") %>" />
-<meta property="fb:app_id" content="1435050833470506" />
+<meta property="fb:app_id" content="<%= ENV["FB_APP_ID"] %>" />
 <meta property="og:type" content="article" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:locale:alternate" content="en_US" />
