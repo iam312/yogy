@@ -16,7 +16,7 @@ class ImagesController < ApplicationController
     begin
       raise ::Yogy::Exceptions::ImageInvalid.new "image is not setted." if image_params[:s3].blank?
       @image.transaction do
-        @image.save
+        @image.save!
 
         #@image.delay.process!( current_user )
         @image.process!( current_user )
