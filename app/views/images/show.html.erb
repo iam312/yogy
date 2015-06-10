@@ -41,7 +41,7 @@
 
 <div class="jumbotron">
   <h2><%= @image.title %> <small><%= @image.yogies %></small></h2>
-  <p><%= image_tag(@image.s3.url) %></p>
+  <p><%= image_tag(@image.s3.normal.url) %></p>
   <h4><%= @image.user.name %> <small><%= @image.created_at %></small></h4>
   <quote><%= @image.desc %></quote>
 </div>
