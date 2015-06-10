@@ -8,6 +8,10 @@ script:
 
 env:
   global:
+    # for aws
     - secure: "BzZdLreEKXDN7Aylqe7OvEjgZCnBwOvtrCVvRpp3XV1Bg1iZeMrCYV9NmIhj6Lhu29o6WIrO73Eai+UGSpCTabvBbIezatT56ugCb1u+rVkfQfLgUK4IKoHgndDEykavDUMLFX9ijXkh+IPUag16HS8l8MxVDeuLS4vrbryReRo="
     - secure: "Qyjh8uA/66TmNsomgJoOOYFgEvU214rPC55EQB+/FGcu4qgwGNSkNz2juOHeEkhHbKL3N8G8LgaQMFJ4qDetAEpoj5+Q5B+3fhlGE1K3jPHWVlY33xm70RHq1BM4juR/9FcGV+BHODbnvDAfDa8HAETTFO8c8XeXdMk0NBD2CX0="
     - secure: "FL+9M+IKpAE7pSIBBDq3anm8DWNea8uSpYqALHzrEby369XJqPkbH7onIN3Alsx4uKR1GTs1E1YnlcUUJ+gAdKCye8YjW6gjzeGbAtonovVK183l5YOfPk+iD7/Q4Ipkn0TakSvuUKDa7dHdpzeKVEqc5jZqZsZmNWcKBqDJamw="
+    # for fb
+    - secure: "kLZx917r0DlCd/28muD30brrozAfhpP+TzmGUXJsEMtrAwg1M+2pU+k6omTIFctpkPhV/Qb7Xav6K/8JCXjW6vFho0koaJMx2VZr81f2pLDP9N4A9dcKEpLyA68ATVlzBQYYCU5CYiWTiOs0RZ7AYjiJ7iRe2FS3UtC3KF7ivN0="
+    - secure: "D4eUWX3SZOU11AZqedaNjyKyPjLsKaLQ8/L3XktWb0DeeuaCW1QTo8tQwGUsVwL9ArGg3v6pONu5j2MzxI2KVP0SOFyN4FjIhRB5Bll94dVdwBuQzi4j4v3yAU/5G/o7OY/9IBFzTAbzlrbMcsMvXRTc4OIzEf+Rn9S7FyKpRmA="
