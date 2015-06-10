@@ -3,10 +3,10 @@ class S3Uploader < CarrierWave::Uploader::Base
 
   storage :fog
   version :normal do
-    process resize_to_limit: [1000, 800]
+    process resize_to_limit: [1000, 1000]
   end
   version :small, from_version: :normal do
-    process resize_to_fill: [380, 280]
+    process resize_to_fill: [380, 380]
   end
 
   def extension_white_list
