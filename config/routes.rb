@@ -12,7 +12,10 @@ Rails.application.routes.draw do
 
   resources 'yogy' do
   end
+
   get 'about', to: 'yogy#about'
+
+  get '/dn/:image_id/:type' =>'dn#show', as: 'dn'
 
   root to: 'yogy#index'
 end
