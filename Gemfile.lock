@@ -65,6 +65,7 @@ GEM
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
     daemons (1.1.9)
+    dalli (2.7.2)
     debug_inspector (0.0.2)
     delayed_job (4.0.6)
       activesupport (>= 3.0, < 5.0)
@@ -192,6 +193,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     jwt (1.5.0)
+    kgio (2.9.3)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
@@ -312,11 +314,13 @@ DEPENDENCIES
   byebug
   carrierwave
   daemons
+  dalli
   delayed_job_active_record
   devise
   figaro
   fog
   jquery-rails
+  kgio
   mini_magick
   mysql2
   omniauth-facebook

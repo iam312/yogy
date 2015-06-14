@@ -6,6 +6,10 @@ gem 'puma'
 gem 'andand'
 gem 'figaro'
 
+# for memcached
+gem 'kgio'
+gem 'dalli'
+
 # delayed_job
 gem 'delayed_job_active_record'
 gem 'daemons'

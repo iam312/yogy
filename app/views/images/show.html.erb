@@ -41,7 +41,7 @@
 
 <div class="jumbotron">
   <h2><%= @image.title %> <small><%= @image.yogies %></small></h2>
-  <p><%= image_tag(@image.s3.normal.url, class: "img_yogy") %></p>
+  <p><%= image_tag(dn_path(@image, 'normal'), class: "img_yogy", id: "img_yogy") %></p>
   <h4><%= @image.user.name %> <small><%= @image.created_at %></small></h4>
   <quote><%= @image.desc %></quote>
 </div>
@@ -52,4 +52,3 @@
   data-width="450"
   data-show-faces="true">
 </div>
-
