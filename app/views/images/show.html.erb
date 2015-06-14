@@ -43,6 +43,7 @@
   <h2><%= @image.title %> <small><%= @image.yogies %></small></h2>
   <p><%= image_tag(dn_path(@image, 'normal'), class: "img_yogy", id: "img_yogy") %></p>
   <h4><%= @image.user.name %> <small><%= @image.created_at %></small></h4>
+  <h5><small id="exif"></small></h5>
   <quote><%= @image.desc %></quote>
 </div>
 
@@ -52,3 +53,23 @@
   data-width="450"
   data-show-faces="true">
 </div>
+
+<script>
+$( "#img_yogy" ).load( function() {
+  var img = $("#img_yogy")[0];
+  EXIF.getData(img, function() {
+      var exif_data = EXIF.getAllTags(img);
+      var message = exif_data.Artist + " | " +
+                    exif_data.Copyright + "<br/>" +
+                    exif_data.Model + " | " +
+                    exif_data.DateTimeOriginal + " | " +
+                    exif_data.ExposureProgram + " | " +
+                    "f" + exif_data.FNumber.toString() + " | " +
+                    exif_data.ExposureTime.toString() + "sec | " +
+                    exif_data.FocalLength.toString() + "mm | " +
+                    "iso " + exif_data.ISOSpeedRatings + " | " +
+                    exif_data.Flash;
+      $("#exif").html( message );
+  });
+});
+</script>
