@@ -6,7 +6,7 @@
 <a href="<%= image_path( yogy[:images].first ) %>">
     <p><%= image_tag(dn_path(yogy[:images].first, 'normal'), class: "img_yogy") %></p>
 </a>
-    <h4><%= yogy[:images].first.user.name %> <small><%= yogy[:images].first.created_at %></small></h4>
+    <h4 class="text-right"><%= yogy[:images].first.user.name %> <small><%= yogy[:images].first.created_at %></small></h4>
     <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><small><small><%= yogy[:images].first.desc %></small></small></p>
 <% if yogy[:images].size > 1 %>
     <br />
@@ -20,8 +20,8 @@
         <div class="thumbnail">
           <%= image_tag(dn_path(image, 'small'), class: "img_yogy") %>
           <div class="caption">
-            <h3><%= image.title %></h3>
-            <h4><%= image.user.name %> <small><%= image.created_at %></small></h4>
+            <h4><%= image.title %></h4>
+            <h4 class="text-right"><%= image.user.name %> <small><%= image.created_at %></small></h4>
           </div>
         </div>
       </div>
