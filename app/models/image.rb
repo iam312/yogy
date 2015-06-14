@@ -1,9 +1,7 @@
 class Image < ActiveRecord::Base
-  #validates :asset, presence: true
   validates :s3, presence: true
   validates :user_id, presence: true
 
-  #mount_uploader :asset, ImageUploader
   mount_uploader :s3, S3Uploader
 
   belongs_to :user
