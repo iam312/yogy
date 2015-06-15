@@ -44,6 +44,7 @@
   <p><%= image_tag(dn_path(@image, 'normal'), class: "img_yogy", id: "img_yogy") %></p>
   <h5><small id="exif"></small></h5>
   <h4 class="text-right"><%= @image.user.name %> <small><%= @image.created_at %></small></h4>
+  <br />
   <address><%= sanitize @image.desc.gsub("\n", "<br/>") %></address>
 </div>
 
