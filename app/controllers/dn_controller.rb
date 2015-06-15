@@ -12,8 +12,8 @@ class DnController < ApplicationController
         Net::HTTP.get(uri) # => String
       end
       response.headers['Content-Type'] = 'image/jpeg' 
-      response.headers['X-Accel-Buffering'] = 'no'
-      response.headers['Cache-Control'] ||= 'no-cache'
+      #response.headers['X-Accel-Buffering'] = 'no'
+      #response.headers['Cache-Control'] ||= 'no-cache'
       response.headers['Content-Length'] = image_array.size
       response.stream.write image_array
       response.stream.close
