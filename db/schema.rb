@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608155007) do
+ActiveRecord::Schema.define(version: 20150616152707) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -77,5 +77,8 @@ ActiveRecord::Schema.define(version: 20150608155007) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "yogies", ["created_at"], name: "index_yogies_on_created_at", using: :btree
+  add_index "yogies", ["title"], name: "index_yogies_on_title", using: :btree
 
 end
