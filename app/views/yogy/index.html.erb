@@ -4,7 +4,7 @@
         <small><%= yogy[:images].first.title %></small>
     </h2>
 <a href="<%= image_path( yogy[:images].first ) %>">
-    <p><%= responsive_image_tag( yogy[:images].first, class: "img_yogy title" ) %></p>
+    <p><%= responsive_image_tag( yogy[:images].first, class: "yogy_img title" ) %></p>
 </a>
     <h4 class="text-right"><%= yogy[:images].first.user.name %> <small><%= yogy[:images].first.created_at %></small></h4>
     <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><small><small><%= yogy[:images].first.desc %></small></small></p>
@@ -16,14 +16,8 @@
 <div class="row">
   <% yogy[:images].drop(1).each do |image| %>
     <a href="<%= image_path( image ) %>">
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <%= responsive_image_tag(image, class: "img_yogy subtitle") %>
-          <div class="caption">
-            <h4><%= image.title %></h4>
-            <h4 class="text-right"><%= image.user.name %> <small><%= image.created_at %></small></h4>
-          </div>
-        </div>
+      <div class="yogy_img_cols">
+          <%= responsive_image_tag(image, class: "yogy_img subtitle") %>
       </div>
     </a>
   <% end %>
@@ -37,3 +31,7 @@
 <% end %>
 
 <%= render "layouts/footer" %>
+
+<script>
+  yogy_index();
+</script>

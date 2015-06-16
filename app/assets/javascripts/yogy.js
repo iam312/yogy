@@ -6,7 +6,7 @@ function resizeimage( index, img ) {
   var img_url = '';
   var is_title = $.inArray( "title", img.classList ) >= 0;
 
-  if ((contentwidth) < '1000') {
+  if ((contentwidth) < '380') {
     if (is_title) {
       img_url = $(img).attr('data-src-small');
     } else {
@@ -23,5 +23,14 @@ function resizeimage( index, img ) {
 }
 
 function img_lazyload() {
-  $.each( $('.img_yogy'), resizeimage );
+  $.each( $('.yogy_img'), resizeimage );
+}
+
+function yogy_index() {
+  var contentwidth = $('body').width();
+  if ((contentwidth) < '380') {
+    $('.yogy_img_cols').addClass('col-xs-4 col-md-3');
+  } else {
+    $('.yogy_img_cols').addClass('col-sm-6 col-md-4');
+  }
 }

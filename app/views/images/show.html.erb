@@ -41,7 +41,7 @@
 
 <div class="jumbotron">
   <h2><%= @image.title %> <small><%= @image.yogies %></small></h2>
-  <p><%= responsive_image_tag(@image, class: "img_yogy title") %></p>
+  <p><%= responsive_image_tag(@image, class: "yogy_img title") %></p>
   <h5><small id="exif"></small></h5>
   <h4 class="text-right"><%= @image.user.name %> <small><%= @image.created_at %></small></h4>
   <br />
@@ -56,8 +56,8 @@
 </div>
 
 <script>
-$( ".img_yogy" ).load( function() {
-  var img = $(".img_yogy")[0];
+$( ".yogy_img" ).load( function() {
+  var img = $(".yogy_img")[0];
   EXIF.getData(img, function() {
       var exif_data = EXIF.getAllTags(img);
       var message = exif_data.Artist + " | " +

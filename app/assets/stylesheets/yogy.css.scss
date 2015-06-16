@@ -3,9 +3,17 @@
   They will automatically be included in application.css.
 */
 
-.img_yogy
+.yogy_img
 {
     max-width: 100%;
-    min-width: 300px;
     height: auto;
+}
+
+.yogy_img_cols { 
+}
+
+
+@media only screen and (max-width: 380px) {
+  .yogy_img_cols { 
+  }
 }
