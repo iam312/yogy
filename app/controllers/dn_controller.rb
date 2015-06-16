@@ -6,7 +6,7 @@ class DnController < ApplicationController
     type = params[:type]
 
     begin
-      image_array = Rails.cache.fetch( "#{image_id}_#{type}", :expires_in => 10.minutes ) do
+      image_array = Rails.cache.fetch( "#{image_id}_#{type}", :expires_in => 48.hours ) do
         image_url = get_dn_url( image_id, type )
         uri = URI(image_url)
         Net::HTTP.get(uri) # => String
