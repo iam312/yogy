@@ -25,8 +25,3 @@ function resizeimage( index, img ) {
 function img_lazyload() {
   $.each( $('.img_yogy'), resizeimage );
 }
-
-$( document ).ready(function() {
-  img_lazyload();
-});
-
