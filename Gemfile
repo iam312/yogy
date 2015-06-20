@@ -16,7 +16,6 @@ gem 'daemons'
 
 # 이미지 처리
 gem 'carrierwave'
-gem 'rmagick'
 gem 'mini_magick'
 gem 'aws-sdk', '~> 1.36.1'
 gem 'fog'

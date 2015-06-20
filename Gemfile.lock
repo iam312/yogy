@@ -260,7 +260,6 @@ GEM
     rake (10.4.2)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
-    rmagick (2.15.2)
     rspec-core (3.3.1)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.0)
@@ -333,7 +332,6 @@ DEPENDENCIES
   pry-byebug
   puma
   rails (~> 4.1.7)
-  rmagick
   rspec-rails (~> 3.0)
   sass-rails
   turbolinks
