@@ -17,9 +17,9 @@ gem 'daemons'
 # 이미지 처리
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'rmagick'
 gem 'aws-sdk', '~> 1.36.1'
 gem 'fog'
+gem 'exiftool_vendored'
 
 # 회원 인증
 gem 'devise'

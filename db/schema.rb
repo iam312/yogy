@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616152707) do
+ActiveRecord::Schema.define(version: 20150620141610) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -41,7 +41,11 @@ ActiveRecord::Schema.define(version: 20150616152707) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "s3"
+    t.text     "exif"
+    t.integer  "season"
   end
+
+  add_index "images", ["season"], name: "index_images_on_season", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"
@@ -71,8 +75,6 @@ ActiveRecord::Schema.define(version: 20150616152707) do
     t.integer  "user_id"
     t.integer  "image_id"
     t.string   "address"
-    t.integer  "x"
-    t.integer  "y"
     t.text     "desc"
     t.datetime "created_at"
     t.datetime "updated_at"
