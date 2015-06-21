@@ -11,10 +11,11 @@ Rails.application.routes.draw do
   end
 
   resources 'yogy', param: :title
+  get 'index_v2', to: 'yogy#index_v2'
 
   get 'about', to: 'yogy#about'
 
   get '/dn/:image_id/:type' =>'dn#show', as: 'dn'
 
-  root to: 'yogy#index'
+  root to: 'yogy#index_v2'
 end

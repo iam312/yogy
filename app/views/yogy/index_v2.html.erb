@@ -1,0 +1,30 @@
+<% @yogies.each do |yogy| %>
+  <div class="page-header">
+    <% extra = Yogies.extra_by_images( yogy[:images] ) %>
+    <h4 class="media-heading"><%= link_to "##{yogy[:title]}", yogy_path(yogy[:title]) %><% if yogy[:count].to_i > 1 %><sup><span class="badge"><%= yogy[:count].to_i %></span></sup><% end %>
+    <small>
+      <% extra = Yogies.extra_by_images( yogy[:images] ) %>
+      <% extra[:seasons].each do |season| %>
+        <%= link_season( season ) %>
+      <% end %> | 
+      <% extra[:years].each do |year| %>
+        <%= link_year( year ) %>
+      <% end %>
+    </small>
+    </h4>
+  </div>
+
+  <div class="row">
+    <% yogy[:images].each do |image| %>
+      <div class="col-xs-3 col-md-2">
+        <a href="<%= image_path( image ) %>" class="thumbnail">
+          <%= responsive_image_tag( image, class: "yogy_img xsmall" ) %>
+        </a>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<script>
+  yogy_index();
+</script>

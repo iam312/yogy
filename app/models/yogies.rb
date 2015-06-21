@@ -50,6 +50,24 @@ class Yogies < ActiveRecord::Base
     }
   end
 
+  def self.extra_by_images( images )
+    seasons = []
+    years = []
+
+    images.each do |image|
+      begin
+        exif = JSON.parse(image.exif, :symbolize_names => true)
+        years << exif[:create_date].split(":")[0].to_i
+      rescue
+      end
+      seasons << image.season unless image.season.blank?
+    end
+
+    { seasons: seasons.uniq.sort,
+      years: years.uniq.sort.reverse,
+    }
+  end
+
   def to_param
     title
   end
