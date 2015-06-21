@@ -1,11 +1,15 @@
 <div class="panel panel-default">
   <div class="panel-body">
+    <h3><%= @yogies.first.title %>
+    <small>
     <% @extra[:seasons].each do |season| %>
       <%= link_season( season ) %>
     <% end %> | 
     <% @extra[:years].each do |year| %>
       <%= link_year( year ) %>
     <% end %>
+    </small>
+    </h3>
   </div>
 </div>
 
