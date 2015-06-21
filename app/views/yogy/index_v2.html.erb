@@ -17,8 +17,8 @@
   <div class="row">
     <% yogy[:images].each do |image| %>
       <div class="col-xs-3 col-md-2">
-        <a href="<%= image_path( image ) %>" class="thumbnail">
-          <%= responsive_image_tag( image, class: "yogy_img xsmall" ) %>
+        <a href="<%= image_path( image ) %>">
+          <%= responsive_image_tag( image, class: "yogy_img xsmall img-rounded" ) %>
         </a>
       </div>
     <% end %>
