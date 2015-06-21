@@ -40,6 +40,7 @@ module ApplicationHelper
   end
 
   def link_season( season )
+    return "" if season.blank?
     seasons = [ 'spring', 'summer', 'autumn', 'winter' ]
     seasons[ season - 1 ]
   end

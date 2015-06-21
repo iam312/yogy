@@ -43,7 +43,7 @@
   <p><%= responsive_image_tag(@image, class: "yogy_img title") %></p>
   <h5><small id="exif"></small></h5>
   <br />
-  <h2><%= @image.title %> <small><%= raw link_yogies(@image.yogies) %></small></h2>
+  <h2><%= @image.title %> <small><%= raw link_yogies(@image.yogies) %></small> <small><%= raw link_season(@image.season) %></small></h2>
   <h4 class="text-right"><%= @image.user.name %> <small><%= @image.created_at %></small></h4>
   <br />
   <address><%= sanitize @image.desc.gsub("\n", "<br/>") %></address>
