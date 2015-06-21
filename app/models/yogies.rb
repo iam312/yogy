@@ -37,7 +37,11 @@ class Yogies < ActiveRecord::Base
     years = []
 
     yogies.each do |yogy|
-      years << yogy.created_at.year
+      begin
+        exif = JSON.parse(yogy.image.exif, :symbolize_names => true)
+        years << exif[:create_date].split(":")[0].to_i
+      rescue
+      end
       seasons << yogy.image.season unless yogy.image.season.blank?
     end
 
