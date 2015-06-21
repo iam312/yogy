@@ -1,12 +1,13 @@
 class Yogies < ActiveRecord::Base
-  has_many :images, dependent: :destroy
+  #has_one :image, dependent: :destroy
+  belongs_to :image  
   has_many :users 
 
   def self.by_count
     result = []
 
     Rails.cache.fetch( 'index', :expires_in => 1.minutes ) do
-      yogies = group( :title ).count.sort_by {|_key, value| value}.reverse 
+      yogies = group( :title ).count.sort_by {|_key, value| value}.reverse
       yogies.each do |yogy|
         title = yogy[0]
         count = yogy[1]
@@ -22,8 +23,31 @@ class Yogies < ActiveRecord::Base
 
       result
     end
+  end
 
-    #result
+  def self.by_title( title )
+    cache_key = 'yogies_by_title_' + title
+    Rails.cache.fetch( cache_key, :expires_in => 1.minutes ) do
+      Yogies.where( {title: title} ).order( 'created_at desc' )
+    end
+  end
+
+  def self.extra( yogies )
+    seasons = []
+    years = []
+
+    yogies.each do |yogy|
+      years << yogy.created_at.year
+      seasons << yogy.image.season unless yogy.image.season.blank?
+    end
+
+    { seasons: seasons.uniq.sort,
+      years: years.uniq.sort.reverse,
+    }
+  end
+
+  def to_param
+    title
   end
 end
 

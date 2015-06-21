@@ -15,6 +15,8 @@ class YogyController < ApplicationController
   end
 
   def show
+    @yogies = Yogies.by_title( params[:title] )
+    @extra = Yogies.extra( @yogies )
   end
 
   def delete

@@ -19,7 +19,6 @@ class Image < ActiveRecord::Base
         yogy.save!
         yogy_ids << yogy.id
       end
-binding.pry
 
       image.yogy_ids = yogy_ids.map(&:inspect).join(',')
       image.save!

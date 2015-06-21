@@ -10,8 +10,7 @@ Rails.application.routes.draw do
   resources 'images' do
   end
 
-  resources 'yogy' do
-  end
+  resources 'yogy', param: :title
 
   get 'about', to: 'yogy#about'
 

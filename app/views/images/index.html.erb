@@ -1,16 +1,16 @@
 <div class="row">
 <% @images.each do |image| %>
-  <a href="<%= image_path( image ) %>">
-    <div class="col-sm-6 col-md-4">
-      <div class="thumbnail">
-        <%= responsive_image_tag(image, class: "yogy_img title") %>
-        <div class="caption">
-          <h3><%= image.title %></h3>
-          <small><%= image.created_at %></small>
-          <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%= image.desc %></p>
-        </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <a href="<%= image_path( image ) %>">
+      <%= responsive_image_tag(image, class: "yogy_img title") %>
+      </a>
+      <div class="caption">
+        <h3><%= image.title %></h3>
+        <small><%= image.created_at %></small>
+        <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%= image.desc %></p>
       </div>
     </div>
-  </a>
+  </div>
 <% end %>
 </div>

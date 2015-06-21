@@ -1,2 +1,27 @@
-<h1>Yogy#show</h1>
-<p>Find me in app/views/yogy/show.html.erb</p>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <% @extra[:seasons].each do |season| %>
+      <%= link_season( season ) %>
+    <% end %> | 
+    <% @extra[:years].each do |year| %>
+      <%= link_year( year ) %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+<% @yogies.each do |yogy| %>
+  <div class="col-xs-6 col-md-3">
+    <div class="thumbnail">
+      <a href="<%= image_path( yogy.image ) %>">
+      <%= responsive_image_tag(yogy.image, class: "yogy_img xsmall") %>
+      </a>
+      <div class="caption">
+        <h3><%= yogy.image.title %></h3>
+        <small><%= yogy.image.created_at %></small>
+        <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%= yogy.image.desc %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>

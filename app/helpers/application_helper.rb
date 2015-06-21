@@ -23,4 +23,29 @@ module ApplicationHelper
          
   end
 
+  def alert_devise_to_bootstrap( devise )
+    alert_type = {"alert": "warning", "notice": "success", "error": "danger"}
+    alert_type[devise.to_sym]
+  end
+
+  def link_yogies( yogies_string )
+    result = ""
+    yogies = yogies_string.split(",")
+    yogies.each_with_index do |yogy, idx|
+      result += link_to( yogy.strip, yogy_path( yogy.strip.gsub('#', '') ) )
+      result += ", " if idx + 1 < yogies.size
+    end
+
+    result
+  end
+
+  def link_season( season )
+    seasons = [ 'spring', 'summer', 'autumn', 'winter' ]
+    seasons[ season - 1 ]
+  end
+
+  def link_year( year )
+    year
+  end
+
 end
