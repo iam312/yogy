@@ -12,11 +12,9 @@
 <div class="row">
 <% @yogies.each do |yogy| %>
   <div class="col-xs-6 col-md-3">
-    <div class="thumbnail">
       <a href="<%= image_path( yogy.image ) %>">
       <%= responsive_image_tag(yogy.image, class: "yogy_img xsmall") %>
       </a>
-    </div>
   </div>
 <% end %>
 </div>
