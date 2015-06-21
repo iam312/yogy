@@ -16,11 +16,6 @@
       <a href="<%= image_path( yogy.image ) %>">
       <%= responsive_image_tag(yogy.image, class: "yogy_img xsmall") %>
       </a>
-      <div class="caption">
-        <h3><%= yogy.image.title %></h3>
-        <small><%= yogy.image.created_at %></small>
-        <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%= yogy.image.desc %></p>
-      </div>
     </div>
   </div>
 <% end %>
