@@ -41,8 +41,10 @@ module ApplicationHelper
 
   def link_season( season )
     return "" if season.blank?
-    seasons = [ 'spring', 'summer', 'autumn', 'winter' ]
-    seasons[ season - 1 ]
+    #seasons = [ 'spring', 'summer', 'autumn', 'winter' ]
+    seasons = [ 'spring-25.png', 'summer-25.png', 'autumn-25.png', 'winter-25.png' ]
+    
+    image_tag( "#{seasons[ season - 1 ]}", size: "16x16" )
   end
 
   def link_year( year )
