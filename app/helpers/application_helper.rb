@@ -47,6 +47,14 @@ module ApplicationHelper
     image_tag( "#{seasons[ season - 1 ]}", size: "16x16" )
   end
 
+  def link_season_with_yogy( season, yogy )
+    return "" if (season.blank? or yogy.blank?)
+    seasons_name = [ 'spring', 'summer', 'autumn', 'winter' ]
+    seasons = [ 'spring-25.png', 'summer-25.png', 'autumn-25.png', 'winter-25.png' ]
+    
+    link_to image_tag( "#{seasons[ season - 1 ]}", size: "16x16" ), yogy_season_path( yogy, seasons_name[season - 1] )
+  end
+
   def link_year( year )
     year
   end

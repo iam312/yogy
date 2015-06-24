@@ -11,8 +11,11 @@ Rails.application.routes.draw do
   end
 
   resources 'yogy', param: :title
-  get 'index_v2', to: 'yogy#index_v2'
+  get 'yogy/:title/season/:season' => 'yogy#show', as: 'yogy_season'
+  get 'yogy/:title/year/:year' => 'yogy#show', as: 'yogy_year'
+  get 'yogy/:title/season/:season/year/:year' => 'yogy#show', as: 'yogy_season_year'
 
+  get 'index_v2', to: 'yogy#index_v2'
   get 'about', to: 'yogy#about'
 
   get '/dn/:image_id/:type' =>'dn#show', as: 'dn'

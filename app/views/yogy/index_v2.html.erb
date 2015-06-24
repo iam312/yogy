@@ -5,7 +5,7 @@
     <small>
       <% extra = Yogies.extra_by_images( yogy[:images] ) %>
       <% extra[:seasons].each do |season| %>
-        <%= link_season( season ) %>
+        <%= link_season_with_yogy( season, yogy[:title] ) %>
       <% end %> | 
       <% extra[:years].each do |year| %>
         <%= link_year( year ) %>

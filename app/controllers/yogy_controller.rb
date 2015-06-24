@@ -19,7 +19,21 @@ class YogyController < ApplicationController
   end
 
   def show
-    @yogies = Yogies.by_title( params[:title] )
+    title = params[:title]
+    season = case params[:season]
+      when 'all' then nil
+      when 'spring' then 1
+      when 'summer' then 2
+      when 'autumn' then 3
+      when 'winter' then 4
+      else nil
+    end
+    year = nil
+#    year = case params[:year]
+#      when 'all' then nil
+#      else params[:year].to_i
+#    end
+    @yogies = Yogies.by_title( title, season, year )
     @extra = Yogies.extra( @yogies )
   end
 

@@ -25,10 +25,16 @@ class Yogies < ActiveRecord::Base
     end
   end
 
-  def self.by_title( title )
-    cache_key = 'yogies_by_title_' + title
+  def self.by_title( title, season = nil, year = nil )
+    cache_key = "yogies_by_title_#{title}_#{season}_#{year}"
     Rails.cache.fetch( cache_key, :expires_in => 1.minutes ) do
-      Yogies.where( {title: title} ).order( 'created_at desc' )
+      #Yogies.where( {title: title} ).order( 'created_at desc' )
+      condition = { yogies: {title: title} }
+      images_condition = {}
+      images_condition[:season] = season unless season.blank?
+      images_condition[:year] = year unless year.blank?
+      condition[:images] = images_condition unless images_condition.blank?
+      Yogies.includes( :image ).where( condition ).order( 'yogies.created_at desc' )
     end
   end
 
