@@ -28,11 +28,7 @@ class YogyController < ApplicationController
       when 'winter' then 4
       else nil
     end
-    year = nil
-#    year = case params[:year]
-#      when 'all' then nil
-#      else params[:year].to_i
-#    end
+    year = params[:year]
     @yogies = Yogies.by_title( title, season, year )
     @extra = Yogies.extra( @yogies )
   end

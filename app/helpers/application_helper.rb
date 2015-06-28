@@ -59,4 +59,8 @@ module ApplicationHelper
     year
   end
 
+  def link_year_with_yogy( year, yogy )
+    link_to year, yogy_year_path( yogy, year )
+  end
+
 end

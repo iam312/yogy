@@ -8,7 +8,7 @@
         <%= link_season_with_yogy( season, yogy[:title] ) %>
       <% end %> | 
       <% extra[:years].each do |year| %>
-        <%= link_year( year ) %>
+        <%= link_year_with_yogy( year, yogy[:title] ) %>
       <% end %>
     </small>
     </h4>
