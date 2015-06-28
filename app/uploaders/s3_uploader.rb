@@ -73,9 +73,11 @@ class S3Uploader < CarrierWave::Uploader::Base
 
     # 북반구인가 남반구인가?
     hemisphere = (e[:gps_latitude_ref] || "n").downcase.include?("n") ? "n" : "s"
+    year = e[:create_date].nil? ? nil : e[:create_date].split(':')[0].to_i
     month = e[:create_date].nil? ? nil : e[:create_date].split(':')[1].to_i
     model.season = _get_season( month, hemisphere )
 
+    model.year = year
     model.exif = e.to_json 
   end
 
