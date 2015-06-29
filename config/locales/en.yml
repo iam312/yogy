@@ -21,6 +21,12 @@
 
 en:
   hello: "Hello world"
+  common:
+    season:
+      spring: 'Spring'
+      summer: 'Summer'
+      autumn: 'Autumn'
+      winter: 'Winter'
   images:
     new:
       title: 'title'

@@ -1,4 +1,6 @@
 <script>
+  $('body').css("background-color","#121212");
+
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -43,7 +45,7 @@
   <p><%= responsive_image_tag(@image, class: "yogy_img title") %></p>
   <h5><small id="exif"></small></h5>
   <br />
-  <h3><%= @image.title %> <small><%= raw link_yogies(@image.yogies) %></small> <small><%= raw link_season(@image.season) %></small></h3>
+  <h3><%= @image.title %> <small><%= raw link_yogies(@image.yogies) %></small> <small><%= link_season_text(@image.season) %></small></h3>
   <h5 class="text-right"><%= @image.user.name %> <small><%= @image.created_at %></small></h5>
   <br />
   <address><%= sanitize @image.desc.gsub("\n", "<br/>") %></address>
@@ -61,15 +63,23 @@ $( ".yogy_img" ).load( function() {
   var img = $(".yogy_img")[0];
   EXIF.getData(img, function() {
       var exif_data = EXIF.getAllTags(img);
+      var exposure_time = parseFloat(exif_data.ExposureTime.toString());
+      var exposure_time_str = ""
+      if (exposure_time >= 1) {
+        exposure_time_str = exposure_time + "sec | "
+      } else {
+        exposure_time_str = "1/" + (1.0/exposure_time) + "sec | "
+      }
+      
       var message = exif_data.Artist + " | " +
                     exif_data.Copyright + "<br/>" +
                     exif_data.DateTimeOriginal + " | " +
                     exif_data.Model + " | " +
                     exif_data.ExposureProgram + " | " +
-                    "f" + exif_data.FNumber.toString() + " | " +
-                    exif_data.ExposureTime.toString() + "sec | " +
-                    exif_data.FocalLength.toString() + "mm | " +
                     "iso " + exif_data.ISOSpeedRatings + " | " +
+                    "f" + exif_data.FNumber.toString() + " | " +
+                    exposure_time_str +
+                    exif_data.FocalLength.toString() + "mm | " +
                     exif_data.Flash;
       $("#exif").html( message );
   });

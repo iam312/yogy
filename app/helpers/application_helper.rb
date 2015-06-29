@@ -47,6 +47,13 @@ module ApplicationHelper
     image_tag( "#{seasons[ season - 1 ]}", size: "16x16" )
   end
 
+  def link_season_text( season )
+    return "" if season.blank?
+    seasons = [ 'spring', 'summer', 'autumn', 'winter' ]
+    
+    I18n.t( "common.season.#{seasons[ season - 1 ]}" )
+  end
+
   def link_season_with_yogy( season, yogy )
     return "" if (season.blank? or yogy.blank?)
     seasons_name = [ 'spring', 'summer', 'autumn', 'winter' ]
