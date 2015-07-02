@@ -6,6 +6,10 @@ class Image < ActiveRecord::Base
 
   belongs_to :user
 
+  scope :get_next_image_id, ->(id) { where( ["id > ?", id] ).order( 'id asc' ).limit(1).first.andand.id }
+  scope :get_prev_image_id, ->(id) { where( ["id < ?", id] ).order( 'id desc' ).limit(1).first.andand.id }
+
+
   def process!( current_user )
     yogy_ids = []
     image = Image.find_by id: id

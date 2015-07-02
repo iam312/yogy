@@ -7,8 +7,8 @@ Rails.application.routes.draw do
 #    get 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
 #  end
 
-  resources 'images' do
-  end
+  resources 'images'
+  get 'images/:id/nav/:nav' => 'images#show', as: 'image_nav'
 
   resources 'yogy', param: :title
   get 'yogy/:title/season/:season' => 'yogy#show', as: 'yogy_season'

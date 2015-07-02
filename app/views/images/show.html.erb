@@ -42,7 +42,7 @@
 <% end %>
 
 <div class="jumbotron">
-  <p><%= responsive_image_tag(@image, class: "yogy_img title") %></p>
+  <p id="img_nav"><%= responsive_image_tag(@image, class: "yogy_img title") %></p>
   <h5><small id="exif"></small></h5>
   <br />
   <h3><%= @image.title %> <small><%= raw link_yogies(@image.yogies) %></small> <small><%= link_season_text(@image.season) %></small></h3>
@@ -83,5 +83,31 @@ $( ".yogy_img" ).load( function() {
                     exif_data.Flash;
       $("#exif").html( message );
   });
+
 });
+
+$(".yogy_img").click( function(e) {
+  var side = -1;
+  if ( e.pageX < ($(this).width() / 3) ) {
+    side = 0;
+  }
+
+  if ( e.pageX > ($(this).width() / 3) * 2 ) {
+    side = 1;
+  }
+
+  var url_prev = "<%= image_nav_path( @image, 'prev' ) %>";
+  var url_next = "<%= image_nav_path( @image, 'next' ) %>";
+  var url = ""
+  if (side == 0) {
+    url = url_prev;
+  } else if (side == 1) {
+    url = url_next;
+  }
+
+  if (url != "") {
+    window.location = url;
+  }
+} );
+  
 </script>
