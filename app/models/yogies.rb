@@ -17,7 +17,7 @@ class Yogies < ActiveRecord::Base
 
         result << { title: title,
           count: count,
-          images: Image.where( { id: best_image_ids } ).order( 'created_at desc' )
+          images: Image.where( { id: best_image_ids } ).order( 'view_count desc').order( 'created_at desc' )
         }
       end
 
@@ -33,7 +33,7 @@ class Yogies < ActiveRecord::Base
       images_condition[:season] = season unless season.blank?
       images_condition[:year] = year unless year.blank?
       condition[:images] = images_condition unless images_condition.blank?
-      Yogies.includes( :image ).where( condition ).order( 'yogies.created_at desc' )
+      Yogies.includes( :image ).where( condition ).order( 'images.view_count desc').order( 'yogies.created_at desc' )
     end
   end
 
