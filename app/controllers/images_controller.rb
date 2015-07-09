@@ -44,6 +44,7 @@ class ImagesController < ApplicationController
       end
     end
     
+    Image.increment_counter( :view_count, id )
     @image = Image.find_by_id( id )
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150628122543) do
+ActiveRecord::Schema.define(version: 20150709150759) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -44,9 +44,11 @@ ActiveRecord::Schema.define(version: 20150628122543) do
     t.text     "exif"
     t.integer  "season"
     t.integer  "year"
+    t.integer  "view_count", default: 0
   end
 
   add_index "images", ["season"], name: "index_images_on_season", using: :btree
+  add_index "images", ["view_count"], name: "index_images_on_view_count", using: :btree
   add_index "images", ["year"], name: "index_images_on_year", using: :btree
 
   create_table "users", force: true do |t|
