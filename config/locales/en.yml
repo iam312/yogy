@@ -37,7 +37,7 @@ en:
       new: 'new'
   gnb:
     image_list: 'Image List'
-    new_image: 'New Image'
+    upload_image: 'Upload Image'
 
   error:
     fail_to_regist_image: 'Failed to regist image.'
