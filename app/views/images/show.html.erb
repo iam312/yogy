@@ -58,6 +58,12 @@
   <% end %>
     <address id="readonly_desc"><%= sanitize @image.desc.gsub("\n", "<br/>") %></address>
   </span>
+  <button type="button" class="btn btn-default btn-xs">
+    <span id="like" class="glyphicon glyphicon-plus-sign"></span> 15
+  </button>
+  <button type="button" class="btn btn-default btn-xs">
+    <span id="dislike" class="glyphicon glyphicon-minus-sign"></span> 0
+  </button>
 </div>
 
 <div
