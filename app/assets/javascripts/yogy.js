@@ -34,3 +34,4 @@ function yogy_index() {
     $('.yogy_img_cols').addClass('col-sm-6 col-md-4');
   }
 }
+

@@ -48,7 +48,16 @@
   <h3><%= @image.title %> <small><%= raw link_yogies(@image.yogies) %></small> <small><%= link_season_text(@image.season) %></small></h3>
   <h5 class="text-right"><%= @image.user.name %> <small><%= @image.created_at %></small></h5>
   <br />
-  <address><%= sanitize @image.desc.gsub("\n", "<br/>") %></address>
+  <span id="description_edit" class="hidden">
+    <span id="save_description" class="glyphicon glyphicon-ok"></span>
+    <%= text_area_tag 'desc', @image.desc, rows: 10, style: "width:100%" %>
+  </span>
+  <span id="description">
+  <% if not current_user.nil? and current_user.id == @image.user_id %>
+    <span id="modify_description" class="glyphicon glyphicon-wrench"></span>
+  <% end %>
+    <address id="readonly_desc"><%= sanitize @image.desc.gsub("\n", "<br/>") %></address>
+  </span>
 </div>
 
 <div
@@ -109,5 +118,42 @@ $(".yogy_img").click( function(e) {
     window.location = url;
   }
 } );
+
+$(document).ajaxSend(function(e, xhr, options) {
+  var token = $("meta[name='csrf-token']").attr("content");
+  xhr.setRequestHeader("X-CSRF-Token", token);
+});
+
+function save_description() {
+  var jqxhr = $.post( "<%= image_save_description_path(@image) %>", $( "#desc" ).serialize(),
+  function() {
+    //alert( "success" );
+    var toBeDisplayed = $("#desc").val().replace(/\n/g,"<br>");;
+    $("#readonly_desc").html( toBeDisplayed );
+  })
+  .done(function() {
+    //alert( "second success" );
+  })
+  .fail(function() {
+    alert( "error" );
+  })
+  .always(function() {
+    //alert( "finished" );
+  });
+}
   
+function toggle_edit() {
+  $("#description").toggleClass("hidden");
+  $("#description_edit").toggleClass("hidden");
+}
+
+$("#modify_description").click( function(e) {
+  toggle_edit();
+} );
+
+$("#save_description").click( function(e) {
+  save_description();
+  toggle_edit();
+} );
+
 </script>

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources 'images'
   get 'images/:id/nav/:nav' => 'images#show', as: 'image_nav'
+  post 'images/:id/save_desc' => 'images#ajax_save_description', as: 'image_save_description'
 
   resources 'yogy', param: :title
   get 'yogy/:title/season/:season' => 'yogy#show', as: 'yogy_season'

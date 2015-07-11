@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :destroy, :ajax_save_description]
 
   def index
     @images = Image.all.reverse
@@ -47,6 +47,22 @@ class ImagesController < ApplicationController
     Image.increment_counter( :view_count, id )
     @image = Image.find_by_id( id )
   end
+
+  def ajax_save_description
+    result = true
+    image = Image.find_by_id params[:id]
+    if image.nil?
+      result = false
+    else
+      image.desc = params[:desc] 
+      image.save
+    end
+
+    render :json => {
+      result: result
+    }
+  end
+
 
 
   private
