@@ -14,8 +14,8 @@ ko:
     show:
       new: '신규'
   gnb:
-    image_list: '이미지 목록'
-    upload_image: '이미지 등록'
+    photo_list: '사진 목록'
+    upload_photo: '사진 등록'
 
   error:
-    fail_to_regist_image: '이미지를 등록하지 못했습니다.'
+    fail_to_regist_photo: '사진을 등록하지 못했습니다.'
