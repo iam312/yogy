@@ -14,6 +14,9 @@
  *= require_self
  */
 
+// yogy customize
+$link-color:  brown;
+
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
