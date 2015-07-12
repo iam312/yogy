@@ -58,11 +58,11 @@
   <% end %>
     <address id="readonly_desc"><%= sanitize @image.desc.gsub("\n", "<br/>") %></address>
   </span>
-  <button type="button" class="btn btn-default btn-xs">
-    <span id="like" class="glyphicon glyphicon-plus-sign"></span> 15
+  <button type="button" class="btn btn-default btn-xs" id="like" <%= "disabled" if not current_user.nil? and Liker.am_i? current_user.id, @image.id %>>
+    <span class="glyphicon glyphicon-plus-sign"></span> <span id="like_count"><%= @image.like.andand.to_i %></span>
   </button>
-  <button type="button" class="btn btn-default btn-xs">
-    <span id="dislike" class="glyphicon glyphicon-minus-sign"></span> 0
+  <button type="button" class="btn btn-default btn-xs" id="dislike" <%= "disabled" if not current_user.nil? and Disliker.am_i? current_user.id, @image.id %>>
+    <span class="glyphicon glyphicon-minus-sign"></span> <span id="dislike_count"><%= @image.dislike.andand.to_i %></span>
   </button>
 </div>
 
@@ -130,9 +130,9 @@ $(document).ajaxSend(function(e, xhr, options) {
   xhr.setRequestHeader("X-CSRF-Token", token);
 });
 
-function save_description() {
+function ajax_save_description() {
   var jqxhr = $.post( "<%= image_save_description_path(@image) %>", $( "#desc" ).serialize(),
-  function() {
+  function( result ) {
     //alert( "success" );
     var toBeDisplayed = $("#desc").val().replace(/\n/g,"<br>");;
     $("#readonly_desc").html( toBeDisplayed );
@@ -147,6 +147,32 @@ function save_description() {
     //alert( "finished" );
   });
 }
+
+function ajax_save_like() {
+  var jqxhr = $.post( "<%= image_like_path(@image) %>",
+  function( result ) {
+    if (result["is_success"] == true) {
+      $("#like_count").replaceWith(result["like_count"]);
+      $("#like").prop('disabled', true);
+    }
+  })
+  .fail(function() {
+    alert( "error" );
+  });
+}
+
+function ajax_save_dislike() {
+  var jqxhr = $.post( "<%= image_dislike_path(@image) %>",
+  function( result ) {
+    if (result["is_success"] == true) {
+      $("#dislike_count").replaceWith(result["dislike_count"]);
+      $("#dislike").prop('disabled', true);
+    }
+  })
+  .fail(function() {
+    alert( "error" );
+  });
+}
   
 function toggle_edit() {
   $("#description").toggleClass("hidden");
@@ -158,8 +184,16 @@ $("#modify_description").click( function(e) {
 } );
 
 $("#save_description").click( function(e) {
-  save_description();
+  ajax_save_description();
   toggle_edit();
+} );
+
+$("#like").click( function(e) {
+  ajax_save_like();
+} );
+
+$("#dislike").click( function(e) {
+  ajax_save_dislike();
 } );
 
 </script>

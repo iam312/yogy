@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709150759) do
+ActiveRecord::Schema.define(version: 20150712012042) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20150709150759) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "dislikers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "image_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "dislikers", ["image_id"], name: "dislikers_image_id_idx", using: :btree
+  add_index "dislikers", ["user_id"], name: "dislikers_user_id_idx", using: :btree
 
   create_table "images", force: true do |t|
     t.string   "title"
@@ -50,6 +60,16 @@ ActiveRecord::Schema.define(version: 20150709150759) do
   add_index "images", ["season"], name: "index_images_on_season", using: :btree
   add_index "images", ["view_count"], name: "index_images_on_view_count", using: :btree
   add_index "images", ["year"], name: "index_images_on_year", using: :btree
+
+  create_table "likers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "image_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likers", ["image_id"], name: "likers_image_id_idx", using: :btree
+  add_index "likers", ["user_id"], name: "likers_user_id_idx", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"

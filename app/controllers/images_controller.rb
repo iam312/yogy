@@ -1,5 +1,6 @@
 class ImagesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :destroy, :ajax_save_description]
+  before_action :authenticate_user!, only: [:new, :create, :destroy, :ajax_save_description,
+                                            :image_like, :image_dislike, :image_cancel_like, :image_cancel_dislike,]
 
   def index
     @images = Image.all.reverse
@@ -49,18 +50,68 @@ class ImagesController < ApplicationController
   end
 
   def ajax_save_description
-    result = true
+    is_success = true
     image = Image.find_by_id params[:id]
     if image.nil?
-      result = false
+      is_success = false
     else
       image.desc = params[:desc] 
       image.save
     end
 
     render :json => {
-      result: result
+      is_success: is_success
     }
+  end
+
+  def ajax_like
+    is_success = true
+    like_count = 0
+    begin
+      Liker.transaction do
+        image_id = params[:id]
+        image = Image.find_by_id image_id
+        raise ::Yogy::Exceptions::AlreadyLiked.new "already liked. current_user.id => #{current_user.id}, image_id => #{image.id}" if Liker.where( { user_id: current_user.id, image_id: image_id } ).count > 0
+        Liker.new( {user_id: current_user.id, image_id: image_id} ).save!
+        like_count = image.increment( :like ).like
+        image.save!
+      end
+    rescue => e
+      Rails.logger.error( e )
+      is_success = false
+    end
+    render :json => {
+      is_success: is_success, 
+      like_count: like_count
+    }
+  end
+
+  def ajax_dislike
+    is_success = true
+    dislike_count = 0
+    begin
+      Disliker.transaction do
+        image_id = params[:id]
+        image = Image.find_by_id image_id
+        raise ::Yogy::Exceptions::AlreadyDisliked.new "already disliked. current_user.id => #{current_user.id}, image_id => #{image.id}" if Liker.where( { user_id: current_user.id, image_id: image_id } ).count > 0
+        Disliker.new( {user_id: current_user.id, image_id: image_id} ).save!
+        dislike_count = image.increment( :dislike ).dislike
+        image.save!
+      end
+    rescue => e
+      Rails.logger.error( e )
+      is_success = false
+    end
+    render :json => {
+      is_success: is_success, 
+      dislike_count: dislike_count
+    }
+  end
+
+  def ajax_cancel_like
+  end
+
+  def ajax_cancel_dislike
   end
 
 

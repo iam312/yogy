@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   resources 'images'
   get 'images/:id/nav/:nav' => 'images#show', as: 'image_nav'
   post 'images/:id/save_desc' => 'images#ajax_save_description', as: 'image_save_description'
+  post 'images/:id/like' => 'images#ajax_like', as: 'image_like'
+  post 'images/:id/dislike' => 'images#ajax_dislike', as: 'image_dislike'
+  post 'images/:id/cancel_like' => 'images#ajax_cancel_like', as: 'image_cancel_like'
+  post 'images/:id/cancel_dislike' => 'images#ajax_cancel_dislike', as: 'image_cancel_dislike'
 
   resources 'yogy', param: :title
   get 'yogy/:title/season/:season' => 'yogy#show', as: 'yogy_season'
