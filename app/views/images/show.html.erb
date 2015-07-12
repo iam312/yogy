@@ -49,20 +49,20 @@
   <h5 class="text-right"><%= @image.user.name %> <small><%= @image.created_at %></small></h5>
   <br />
   <span id="description_edit" class="hidden">
-    <span id="save_description" class="glyphicon glyphicon-ok"></span>
+    <span id="save_description" class="glyphicon glyphicon-ok yogy_tone yogy_hand"></span>
     <%= text_area_tag 'desc', @image.desc, rows: 10, style: "width:100%" %>
   </span>
   <span id="description">
   <% if not current_user.nil? and current_user.id == @image.user_id %>
-    <span id="modify_description" class="glyphicon glyphicon-pencil"></span>
+    <span id="modify_description" class="glyphicon glyphicon-pencil yogy_tone yogy_hand"></span>
   <% end %>
     <address id="readonly_desc"><%= sanitize @image.desc.gsub("\n", "<br/>") %></address>
   </span>
   <button type="button" class="btn btn-default btn-xs" id="like" <%= "disabled" if not current_user.nil? and Liker.am_i? current_user.id, @image.id %>>
-    <span class="glyphicon glyphicon-plus-sign"></span> <span id="like_count"><%= @image.like.andand.to_i %></span>
+    <span class="glyphicon glyphicon-plus-sign yogy_tone"></span> <span id="like_count"><%= @image.like.andand.to_i %></span>
   </button>
   <button type="button" class="btn btn-default btn-xs" id="dislike" <%= "disabled" if not current_user.nil? and Disliker.am_i? current_user.id, @image.id %>>
-    <span class="glyphicon glyphicon-minus-sign"></span> <span id="dislike_count"><%= @image.dislike.andand.to_i %></span>
+    <span class="glyphicon glyphicon-minus-sign yogy_tone"></span> <span id="dislike_count"><%= @image.dislike.andand.to_i %></span>
   </button>
 </div>
 

@@ -59,7 +59,8 @@ module ApplicationHelper
     seasons_name = [ 'spring', 'summer', 'autumn', 'winter' ]
     seasons = [ 'spring-25.png', 'summer-25.png', 'autumn-25.png', 'winter-25.png' ]
     
-    link_to image_tag( "#{seasons[ season - 1 ]}", size: "16x16" ), yogy_season_path( yogy, seasons_name[season - 1] )
+    #link_to image_tag( "#{seasons[ season - 1 ]}", size: "16x16", class: "yogy_hand yogy_tone" ), yogy_season_path( yogy, seasons_name[season - 1] )
+    link_to seasons_name[season - 1], yogy_season_path( yogy, seasons_name[season - 1] )
   end
 
   def link_year( year )

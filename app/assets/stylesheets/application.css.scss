@@ -16,6 +16,9 @@
 
 // yogy customize
 $link-color:  brown;
+.yogy_tone {
+  color: $link-color;
+}
 
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
