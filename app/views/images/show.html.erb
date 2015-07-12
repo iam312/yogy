@@ -192,11 +192,19 @@ $("#save_description").click( function(e) {
 } );
 
 $("#like").click( function(e) {
+  <% if current_user.nil? %>
+  window.location.href = "<%= user_omniauth_authorize_path(:facebook) %>";
+  <% else %>
   ajax_save_like();
+  <% end %>
 } );
 
 $("#dislike").click( function(e) {
+  <% if current_user.nil? %>
+  window.location.href = "<%= user_omniauth_authorize_path(:facebook) %>";
+  <% else %>
   ajax_save_dislike();
+  <% end %>
 } );
 
 </script>
