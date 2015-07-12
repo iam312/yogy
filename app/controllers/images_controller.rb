@@ -51,12 +51,18 @@ class ImagesController < ApplicationController
 
   def ajax_save_description
     is_success = true
-    image = Image.find_by_id params[:id]
-    if image.nil?
+    begin
+      image = Image.find_by_id params[:id]
+      if image.nil?
+        is_success = false
+      else
+        unless image.desc == params[:desc]
+          image.desc = params[:desc] 
+          image.save
+        end
+      end
+    rescue => e
       is_success = false
-    else
-      image.desc = params[:desc] 
-      image.save
     end
 
     render :json => {

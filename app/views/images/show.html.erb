@@ -54,7 +54,7 @@
   </span>
   <span id="description">
   <% if not current_user.nil? and current_user.id == @image.user_id %>
-    <span id="modify_description" class="glyphicon glyphicon-wrench"></span>
+    <span id="modify_description" class="glyphicon glyphicon-pencil"></span>
   <% end %>
     <address id="readonly_desc"><%= sanitize @image.desc.gsub("\n", "<br/>") %></address>
   </span>
@@ -134,8 +134,11 @@ function ajax_save_description() {
   var jqxhr = $.post( "<%= image_save_description_path(@image) %>", $( "#desc" ).serialize(),
   function( result ) {
     //alert( "success" );
-    var toBeDisplayed = $("#desc").val().replace(/\n/g,"<br>");;
-    $("#readonly_desc").html( toBeDisplayed );
+    if ( result["is_success"] == true ) {
+      // text santinize 처리
+      var toBeDisplayed = $("#desc").text($("#desc").val()).replace(/\n/g,"<br>");;
+      $("#readonly_desc").html( toBeDisplayed );
+    }
   })
   .done(function() {
     //alert( "second success" );
