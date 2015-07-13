@@ -121,9 +121,10 @@ function ajax_save_description() {
   function( result ) {
     //alert( "success" );
     if ( result["is_success"] == true ) {
-      // text santinize 처리
-      var toBeDisplayed = $("#desc").text($("#desc").val()).replace(/\n/g,"<br>");;
-      $("#readonly_desc").html( toBeDisplayed );
+      // text santinize 처리. 단지 보기 용도일 뿐이다.
+      var toBeDisplayed = $("#desc").text($("#desc").val());
+      $("#readonly_desc").html( toBeDisplayed.html().replace(/\n/g,"<br>") );
+      toggle_edit();
     }
   })
   .done(function() {
@@ -174,7 +175,6 @@ $("#modify_description").click( function(e) {
 
 $("#save_description").click( function(e) {
   ajax_save_description();
-  toggle_edit();
 } );
 
 $("#like").click( function(e) {
