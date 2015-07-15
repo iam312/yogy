@@ -1,6 +1,7 @@
 class Image < ActiveRecord::Base
   validates :s3, presence: true
   validates :user_id, presence: true
+  validates :yogies, presence: true
 
   mount_uploader :s3, S3Uploader
 

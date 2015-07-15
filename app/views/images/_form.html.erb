@@ -1,12 +1,7 @@
 <div class="jumbotron">
     <%= form_for @image, html: { multipart: true } do |f| %>
       <div class="input-group">
-      <%= f.label "#{t('images.new.title')}", class: "input-group-addon" %>
-      <%= f.text_field :title, class: "form-control", placeholder: "Enter a title." %>
-      </div>
-      <div class="input-group">
-      <%= f.label "#{t('images.new.yogies')}", class: "input-group-addon" %>
-      <%= f.text_field :yogies, class: "form-control", placeholder: "Enter yogies. ex) #yogi_1, #yogy_2"  %>
+        <%= f.file_field :s3, class: "form-control" %>
       </div>
       <br />
       <div class="input-group">
@@ -15,7 +10,8 @@
       </div>
       <br />
       <div class="input-group">
-        <%= f.file_field :s3, class: "form-control" %>
+      <%= f.label "#{t('images.new.yogies')}", class: "input-group-addon" %>
+      <%= f.text_field :yogies, class: "form-control", placeholder: "Enter yogies. ex) #yogi_1, #yogy_2"  %>
         <span class="input-group-btn">
           <%= f.submit "Save", class: "btn btn-primary" %>
         </span>
