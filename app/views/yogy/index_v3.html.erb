@@ -17,7 +17,7 @@
       <%= responsive_image_tag( yogy_image, class: "yogy_img title img-responsive" ) %>
       <div class="caption" id="caption-half-down">
         <h2>
-          <%= link_to yogy_image.user.name, image_filter_by_user_path( yogy_image.user_id ) %><small>님이</small> <%= link_to "##{yogy[:title]}", image_path(yogy_image.id) %><small>에서 찍은 사진입니다.</small>
+          <%= link_to "##{yogy[:title]}", image_path(yogy_image.id) %><small>에서</small> <%= link_to yogy_image.user.name, image_filter_by_user_path( yogy_image.user_id ) %><small>님이 찍었습니다.</small>
         </h2>
       </div>
       <div class="caption" id="caption-half-up">
