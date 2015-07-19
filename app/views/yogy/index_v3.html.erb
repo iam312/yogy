@@ -19,7 +19,7 @@
           <% extra[:years].each do |year| %>
             <%= link_year_with_yogy( year, yogy[:title] ) %>
           <% end %>
-          에 찍은 사진이 <%= yogy[:count].to_i - 1 %>장 더 있습니다.
+          에 찍은 사진이 <%= link_to "#{yogy[:count].to_i - 1}장 더 있습니다", yogy_path(yogy[:title]) %>.
           <% end %>
         </p>
       </div>
