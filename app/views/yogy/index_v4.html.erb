@@ -1,0 +1,68 @@
+<style>
+.col-margin {
+  margin-bottom: 30px;
+}
+
+.thumbnail {
+  max-width: 380px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg {
+    position: absolute;
+    top: 0%;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    width: calc(100% - 30px);
+}
+
+.caption {
+  /*
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+      */
+}
+.yogy_thumbnail .caption {
+  color: white;
+  padding: kpx;
+}
+.bg .caption {
+  color: white;
+  padding: 15px;
+}
+</style>
+
+<div class="row">
+<% @yogies.each do |yogy| %>
+  <% extra = Yogies.extra_by_images( yogy[:images] ) %>
+  <% yogy_image = yogy[:images].shuffle.first %>
+  <div class="col-md-6 col-lg-6 col-margin">
+    <a href="<%= image_path( yogy_image ) %>">
+      <%= responsive_image_tag( yogy_image, class: "yogy_img title img-responsive" ) %>
+    </a>
+    <div class="bg">
+      <div class="caption">
+        <h4>
+        <%= link_to yogy_image.user.name, image_filter_by_user_path( yogy_image.user_id ) %>님이 <%= link_to "##{yogy[:title]}", image_path(yogy_image.id) %>에서 찍은 사진입니다.
+        </h4>
+        <h4>
+        <% if yogy[:count].to_i > 1 %>
+        <% extra[:seasons].each do |season| %>
+          <%= link_season_with_yogy( season, yogy[:title] ) %>
+        <% end %>,
+        <% extra[:years].each do |year| %>
+          <%= link_year_with_yogy( year, yogy[:title] ) %>
+        <% end %>
+        에 찍은 사진이 <%= link_to "#{yogy[:count].to_i - 1}장 더 있습니다", yogy_path(yogy[:title]) %>.
+        <% end %>
+        </h4>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<%= render "layouts/footer" %>
