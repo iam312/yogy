@@ -2,29 +2,29 @@
 <% @yogies.each do |yogy| %>
 <% extra = Yogies.extra_by_images( yogy[:images] ) %>
 <% yogy_image = yogy[:images].shuffle.first %>
-<div class="col-md-3">
-<div class="thumbnail">
-  <%= responsive_image_tag( yogy_image, class: "yogy_img title img-responsive" ) %>
-  <div class="caption" id="caption-half-down">
-    <h3>
-      <%= link_to yogy_image.user.name, image_filter_by_user_path( yogy_image.user_id ) %>님이 <%= link_to "##{yogy[:title]}", image_path(yogy_image.id) %>에서 찍은 사진입니다.
-    </h3>
+  <div class="col-md-6 col-lg-6">
+    <div class="thumbnail">
+      <%= responsive_image_tag( yogy_image, class: "yogy_img title img-responsive" ) %>
+      <div class="caption" id="caption-half-down">
+        <h2>
+          <%= link_to yogy_image.user.name, image_filter_by_user_path( yogy_image.user_id ) %>님이 <%= link_to "##{yogy[:title]}", image_path(yogy_image.id) %>에서 찍은 사진입니다.
+        </h2>
+      </div>
+      <div class="caption" id="caption-half-up">
+        <p>
+          <% if yogy[:count].to_i > 1 %>
+          <% extra[:seasons].each do |season| %>
+            <%= link_season_with_yogy( season, yogy[:title] ) %>
+          <% end %>,
+          <% extra[:years].each do |year| %>
+            <%= link_year_with_yogy( year, yogy[:title] ) %>
+          <% end %>
+          에 찍은 사진이 <%= yogy[:count].to_i - 1 %>장 더 있습니다.
+          <% end %>
+        </p>
+      </div>
+    </div>
   </div>
-  <div class="caption" id="caption-half-up">
-    <p>
-      <% if yogy[:count].to_i > 1 %>
-      <% extra[:seasons].each do |season| %>
-        <%= link_season_with_yogy( season, yogy[:title] ) %>
-      <% end %>,
-      <% extra[:years].each do |year| %>
-        <%= link_year_with_yogy( year, yogy[:title] ) %>
-      <% end %>
-      에 찍은 사진이 <%= yogy[:count].to_i - 1 %>장 더 있습니다.
-      <% end %>
-    </p>
-  </div>
-</div>
-</div>
 <% end %>
 </div>
 

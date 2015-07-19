@@ -17,7 +17,7 @@ module ApplicationHelper
               data-src-small=\"#{Rails.application.routes.url_helpers.dn_path(image, 'small')}\" 
               data-src-normal=\"#{Rails.application.routes.url_helpers.dn_path(image, 'normal')}\" 
               data-src-orig=\"#{Rails.application.routes.url_helpers.dn_path(image, 'orig')}\" 
-              role=\"img\" aria-label=\"Textual Description\" 
+              role=\"img\" aria-label=\"\" 
               #{str}
         />"
          
