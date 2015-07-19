@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get 'index_v2', to: 'yogy#index_v2'
   get 'index_v3', to: 'yogy#index_v3'
+  get 'index_v4', to: 'yogy#index_v4'
   get 'about', to: 'yogy#about'
 
   get '/dn/:image_id/:type' =>'dn#show', as: 'dn'

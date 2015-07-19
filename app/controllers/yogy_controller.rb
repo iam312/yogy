@@ -12,6 +12,10 @@ class YogyController < ApplicationController
     @yogies = Yogies.by_count
   end
 
+  def index_v4
+    @yogies = Yogies.by_count
+  end
+
   def new 
     @yogy = Yogies.new
   end
