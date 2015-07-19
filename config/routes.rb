@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 #  end
 
   resources 'images'
+  get 'images/filter/user/:user_id' => 'images#filter_by_user', as: 'image_filter_by_user'
   get 'images/:id/nav/:nav' => 'images#show', as: 'image_nav'
   post 'images/:id/save_desc' => 'images#ajax_save_description', as: 'image_save_description'
   post 'images/:id/like' => 'images#ajax_like', as: 'image_like'
@@ -21,9 +22,10 @@ Rails.application.routes.draw do
   get 'yogy/:title/season/:season/year/:year' => 'yogy#show', as: 'yogy_season_year'
 
   get 'index_v2', to: 'yogy#index_v2'
+  get 'index_v3', to: 'yogy#index_v3'
   get 'about', to: 'yogy#about'
 
   get '/dn/:image_id/:type' =>'dn#show', as: 'dn'
 
-  root to: 'yogy#index_v2'
+  root to: 'yogy#index_v3'
 end

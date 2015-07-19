@@ -121,6 +121,11 @@ class ImagesController < ApplicationController
   end
 
 
+  def filter_by_user
+    #@images = Image.where( { user_id: params[:user_id] } ).reverse
+    @images = Image.filter_by_user( params[:user_id] )
+  end
+
 
   private
 
