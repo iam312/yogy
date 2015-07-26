@@ -50,7 +50,7 @@
     <div class="bg top">
       <div class="caption text-right">
         <h6>
-        <%= link_to yogy_image.user.name, image_filter_by_user_path( yogy_image.user_id ) %>님이 <%= link_to "##{yogy[:title]}", image_path(yogy_image.id) %>에서 찍은 사진입니다
+          <%= link_to yogy_image.user.name, image_filter_by_user_path( yogy_image.user_id ) %>님이 <%= yogy[:title] %>에서 찍은 사진입니다
         </h6>
       </div>
     </div>
