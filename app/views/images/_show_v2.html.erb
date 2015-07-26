@@ -77,45 +77,44 @@
 $( ".yogy_img" ).load( function() {
   var img = $(".yogy_img")[0];
   EXIF.getData(img, function() {
-      var exif_data = EXIF.getAllTags(img);
-      var exposure_time = parseFloat(exif_data.ExposureTime.toString());
-      var exposure_time_str = ""
-      if (exposure_time >= 1) {
-        exposure_time_str = exposure_time + "sec | "
-      } else {
-        exposure_time_str = "1/" + (1.0/exposure_time) + "sec | "
-      }
-      
-      var message = exif_data.Artist + " | " +
-                    exif_data.Copyright + "<br/>" +
-                    exif_data.DateTimeOriginal + " | " +
-                    exif_data.Model + " | " +
-                    exif_data.ExposureProgram + " | " +
-                    "iso " + exif_data.ISOSpeedRatings + " | " +
-                    "f" + exif_data.FNumber.toString() + " | " +
-                    exposure_time_str +
-                    exif_data.FocalLength.toString() + "mm | " +
-                    exif_data.Flash;
-      $("#exif").html( message );
-
-      // show nav icon
-      var height = $(".yogy_img.title").height();
-      $("#img_nav").append( "<div class=\"yogy_nav left yogy_tone\"><span class=\"glyphicon glyphicon-chevron-left\"></span></div>" );
-      $("#img_nav").append( "<div class=\"yogy_nav right yogy_tone\"><span class=\"glyphicon glyphicon-chevron-right\"></span></div>" );
-      var yogy_nav_left = $(".yogy_nav.left");
-      var yogy_nav_right = $(".yogy_nav.right");
-      yogy_nav_left.css( "top", height / 2 );
-      yogy_nav_right.css( "top", height / 2 );
-      yogy_nav_left.click( function(e) {
-        var url = "<%= image_nav_path( @image, 'prev' ) %>";
-        window.location.href = url;
-      } );
-      yogy_nav_right.click( function(e) {
-        var url = "<%= image_nav_path( @image, 'next' ) %>";
-        window.location.href = url;
-      } );
-
+    var exif_data = EXIF.getAllTags(img);
+    var exposure_time = parseFloat(exif_data.ExposureTime.toString());
+    var exposure_time_str = ""
+    if (exposure_time >= 1) {
+      exposure_time_str = exposure_time + "sec | "
+    } else {
+      exposure_time_str = "1/" + (1.0/exposure_time) + "sec | "
+    }
+    
+    var message = exif_data.Artist + " | " +
+                  exif_data.Copyright + "<br/>" +
+                  exif_data.DateTimeOriginal + " | " +
+                  exif_data.Model + " | " +
+                  exif_data.ExposureProgram + " | " +
+                  "iso " + exif_data.ISOSpeedRatings + " | " +
+                  "f" + exif_data.FNumber.toString() + " | " +
+                  exposure_time_str +
+                  exif_data.FocalLength.toString() + "mm | " +
+                  exif_data.Flash;
+    $("#exif").html( message );
   });
+
+  // show nav icon
+  var height = $(".yogy_img.title").height();
+  $("#img_nav").append( "<div class=\"yogy_nav left yogy_tone\"><span class=\"glyphicon glyphicon-chevron-left\"></span></div>" );
+  $("#img_nav").append( "<div class=\"yogy_nav right yogy_tone\"><span class=\"glyphicon glyphicon-chevron-right\"></span></div>" );
+  var yogy_nav_left = $(".yogy_nav.left");
+  var yogy_nav_right = $(".yogy_nav.right");
+  yogy_nav_left.css( "top", height / 2 );
+  yogy_nav_right.css( "top", height / 2 );
+  yogy_nav_left.click( function(e) {
+    var url = "<%= image_nav_path( @image, 'prev' ) %>";
+    window.location.href = url;
+  } );
+  yogy_nav_right.click( function(e) {
+    var url = "<%= image_nav_path( @image, 'next' ) %>";
+    window.location.href = url;
+  } );
 
 });
 
