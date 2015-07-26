@@ -39,9 +39,9 @@ class ImagesController < ApplicationController
     nav = params[:nav]
     unless nav.blank?
       if nav == "prev"
-        id = Image.get_prev_image_id( id ) || Image.first.id
+        id = Image.get_prev_image_id( id ).first.andand.id || Image.first.id
       else
-        id = Image.get_next_image_id( id ) || Image.last.id
+        id = Image.get_next_image_id( id ).first.andand.id || Image.last.id
       end
     end
     

@@ -28,5 +28,5 @@ Rails.application.routes.draw do
 
   get '/dn/:image_id/:type' =>'dn#show', as: 'dn'
 
-  root to: 'yogy#index_v3'
+  root to: 'yogy#index_v4'
 end

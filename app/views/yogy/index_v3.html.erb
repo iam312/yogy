@@ -7,6 +7,9 @@
 .thumbnail small {
   color: white;
 }
+#caption-half-down {
+  cursor: pointer;
+}
 </style>
 <div class="row">
 <% @yogies.each do |yogy| %>
@@ -15,9 +18,9 @@
   <div class="col-md-6 col-lg-6">
     <div class="thumbnail">
       <%= responsive_image_tag( yogy_image, class: "yogy_img title img-responsive" ) %>
-      <div class="caption" id="caption-half-down">
+      <div class="caption" id="caption-half-down"><span style="display:none"><%= image_path(yogy_image.id) %></span>
         <h2>
-          <%= link_to "##{yogy[:title]}", image_path(yogy_image.id) %><small>에서</small> <%= link_to yogy_image.user.name, image_filter_by_user_path( yogy_image.user_id ) %><small>님이 찍은 사진입니다.</small>
+          <%= link_to yogy_image.user.name, image_filter_by_user_path( yogy_image.user_id ) %>님이 <%= raw link_yogies(yogy[:title]) %>에서 찍은 <%= link_to "사진", image_path(yogy_image.id) %>입니다.
         </h2>
       </div>
       <div class="caption" id="caption-half-up">
@@ -39,3 +42,10 @@
 </div>
 
 <%= render "layouts/footer" %>
+
+<script>
+$( "#caption-half-down" ).click(function() {
+  var url = $( this ).children("span").text();
+  window.location.href = url;
+});
+</script>

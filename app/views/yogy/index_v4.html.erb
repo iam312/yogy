@@ -13,7 +13,16 @@
     position: absolute;
     top: 0%;
     left: 15px;
-    background: rgba(0, 0, 0, 0.7);
+      /*
+    background-image: -webkit-gradient(
+      linear, left top, left bottom, from(rgba(0,0,0,0.6)),
+      to(rgba(0,0,0,0.0))
+    );
+  */
+    background-image: linear-gradient(
+      to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.0)
+    );
+    /*background: rgba(0, 0, 0, 0.7); */
     width: calc(100% - 30px);
 }
 
@@ -31,7 +40,9 @@
 }
 .bg .caption {
   color: white;
-  padding: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 15px;
 }
 </style>
 
@@ -44,21 +55,10 @@
       <%= responsive_image_tag( yogy_image, class: "yogy_img title img-responsive" ) %>
     </a>
     <div class="bg">
-      <div class="caption">
-        <h4>
-        <%= link_to yogy_image.user.name, image_filter_by_user_path( yogy_image.user_id ) %>님이 <%= link_to "##{yogy[:title]}", image_path(yogy_image.id) %>에서 찍은 사진입니다.
-        </h4>
-        <h4>
-        <% if yogy[:count].to_i > 1 %>
-        <% extra[:seasons].each do |season| %>
-          <%= link_season_with_yogy( season, yogy[:title] ) %>
-        <% end %>,
-        <% extra[:years].each do |year| %>
-          <%= link_year_with_yogy( year, yogy[:title] ) %>
-        <% end %>
-        에 찍은 사진이 <%= link_to "#{yogy[:count].to_i - 1}장 더 있습니다", yogy_path(yogy[:title]) %>.
-        <% end %>
-        </h4>
+      <div class="caption text-right">
+        <h6>
+        <%= link_to yogy_image.user.name, image_filter_by_user_path( yogy_image.user_id ) %>님이 <%= link_to "##{yogy[:title]}", image_path(yogy_image.id) %>에서 찍은 사진입니다
+        </h6>
       </div>
     </div>
   </div>

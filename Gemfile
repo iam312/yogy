@@ -32,6 +32,10 @@ gem 'bootstrap-sass'
 gem 'sass-rails'
 gem 'uglifier'
 
+group :development do
+  gem 'guard-ctags-bundler'
+end
+
 group :development, :test do
   gem 'mysql2'
   gem 'byebug'
