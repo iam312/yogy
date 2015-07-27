@@ -30,4 +30,31 @@ class Image < ActiveRecord::Base
       image.save!
     end
   end
+
+  def self.deleted?( id )
+    image = find_by_id id
+    image.deleted?
+  end
+
+  def deleted?
+    deleted == 1 ? true : false
+  end
+
+  def self.blinded?( id )
+    image = find_by_id id
+    image.blinded?
+  end
+
+  def blinded?
+    dislike.to_i > 5 ? true : false
+  end
+
+  def self.user_disabled?( id )
+    image = find_by_id id
+    image.user_disabled?
+  end
+
+  def user_disabled?
+    user.enabled == false ? true : false
+  end
 end

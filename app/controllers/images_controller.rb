@@ -1,6 +1,7 @@
 class ImagesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :destroy, :ajax_save_description,
                                             :image_like, :image_dislike, :image_cancel_like, :image_cancel_dislike,]
+  before_action :showable!, only: [:show, ]
 
   def index
     @images = Image.all.reverse
@@ -128,6 +129,13 @@ class ImagesController < ApplicationController
 
 
   private
+  
+  def showable!
+    image = Image.find_by_id params[:id]
+    raise ::Yogy::Exceptions::UserDisabled.new "image_id #{params[:id]}'s user is disabled" if image.user_disabled?
+    raise ::Yogy::Exceptions::ImageDeleted.new "image_id #{params[:id]} is deleted" if image.deleted?
+    raise ::Yogy::Exceptions::ImageBlinded.new "image_id #{params[:id]} is blinded" if image.blinded?
+  end
 
   def image_params
     params.require(:image).permit!
