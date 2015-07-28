@@ -4,7 +4,7 @@ class ImagesController < ApplicationController
   before_action :showable!, only: [:show, ]
 
   def index
-    @images = Image.all.reverse
+    @images = Image.all_images( 0, 100 )
   end
 
   def new
@@ -123,8 +123,7 @@ class ImagesController < ApplicationController
 
 
   def filter_by_user
-    #@images = Image.where( { user_id: params[:user_id] } ).reverse
-    @images = Image.filter_by_user( params[:user_id] )
+    @images = Image.filter_by_user( params[:user_id], 0, 100 )
   end
 
 

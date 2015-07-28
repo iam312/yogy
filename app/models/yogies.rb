@@ -17,7 +17,7 @@ class Yogies < ActiveRecord::Base
 
         result << { title: title,
           count: count,
-          images: Image.where( { id: best_image_ids } ).order( 'view_count desc').order( 'created_at desc' )
+          images: Image.where( { id: best_image_ids } ).available_images.order( 'view_count desc').order( 'created_at desc' )
         }
       end
 
@@ -29,7 +29,7 @@ class Yogies < ActiveRecord::Base
     cache_key = "yogies_by_title_#{title}_#{season}_#{year}"
     Rails.cache.fetch( cache_key, :expires_in => 1.minutes ) do
       condition = { yogies: {title: title} }
-      images_condition = {}
+      images_condition = { deleted: 0, dislike: 0..(ENV["BLIND_LIMIT"].to_i - 1) }
       images_condition[:season] = season unless season.blank?
       images_condition[:year] = year unless year.blank?
       condition[:images] = images_condition unless images_condition.blank?

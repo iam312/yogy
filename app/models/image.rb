@@ -7,9 +7,11 @@ class Image < ActiveRecord::Base
 
   belongs_to :user
 
-  scope :filter_by_user, ->(user_id) { where( user_id: user_id ).reverse }
+  scope :available_images, -> { where({ deleted: 0 }).where("dislike < #{ENV["BLIND_LIMIT"]}") }
+  scope :filter_by_user, ->(user_id, offset, limit) { where( user_id: user_id ).available_images.order('created_at desc').offset(offset).limit(limit) }
   scope :get_prev_image_id, ->(id) { where( ["id < ?", id] ).order( 'id desc' ).limit(1) }
   scope :get_next_image_id, ->(id) { where( ["id > ?", id] ).order( 'id asc' ).limit(1) }
+  scope :all_images, ->(offset, limit) { available_images.order('created_at desc').offset(offset).limit(limit) }
 
 
   def process!( current_user )
