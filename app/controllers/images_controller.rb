@@ -124,6 +124,8 @@ class ImagesController < ApplicationController
 
   def filter_by_user
     @images = Image.filter_by_user( params[:user_id], 0, 100 )
+    @yogies_string = Image.generate_yogies_with_images( @images ).map{ |v| "##{v}" }.join(",")
+    @user = User.find params[:user_id]
   end
 
 

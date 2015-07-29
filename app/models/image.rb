@@ -13,12 +13,26 @@ class Image < ActiveRecord::Base
   scope :get_next_image_id, ->(id) { where( ["id > ?", id] ).order( 'id asc' ).limit(1) }
   scope :all_images, ->(offset, limit) { available_images.order('created_at desc').offset(offset).limit(limit) }
 
+  def yogies_to_array
+    yogies.split('#').drop(1).map { |item| item[/[[:word:] ]+/].strip.gsub(/\s+/, '_') }
+  end
+
+  def self.generate_yogies_with_images( images )
+    yogies = {}
+    images.each do |image|
+      image.yogies_to_array.each do |yogy|
+        yogies.has_key?(yogy) ? yogies[yogy] += 1 : yogies[yogy] = 1
+      end
+    end
+    yogies.sort_by{ |k, v| v }.reverse.map{ |v| v[0] }
+  end
 
   def process!( current_user )
     yogy_ids = []
     image = Image.find_by id: id
     image.transaction do 
-      hash_tags = yogies.split('#').drop(1).map { |item| item[/[[:word:] ]+/].strip.gsub(/\s+/, '_') }
+      #hash_tags = yogies.split('#').drop(1).map { |item| item[/[[:word:] ]+/].strip.gsub(/\s+/, '_') }
+      hash_tags = yogies_to_array
       hash_tags.each do |hash_tag|
         yogy = Yogies.new
         yogy.title = hash_tag
