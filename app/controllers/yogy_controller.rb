@@ -46,4 +46,5 @@ class YogyController < ApplicationController
 
   def about
   end
+
 end

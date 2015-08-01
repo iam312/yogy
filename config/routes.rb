@@ -28,5 +28,8 @@ Rails.application.routes.draw do
 
   get '/dn/:image_id/:type' =>'dn#show', as: 'dn'
 
+  get 'settings', to: 'settings#index'
+  post 'settings', to: 'settings#ajax_update_profile'
+
   root to: 'yogy#index_v4'
 end

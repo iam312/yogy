@@ -20,11 +20,16 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
           <% if user_signed_in? %>
-          <%= link_to "Log out, #{current_user.name}", sign_out_path, class: "small" %>
+            <%= link_to "Log out, #{current_user.name}", sign_out_path, class: "small" %>
           <% else %>
-          <%= link_to "Log in with Facebook", user_omniauth_authorize_path(:facebook), class: "small" %>
+            <%= link_to "Log in with Facebook", user_omniauth_authorize_path(:facebook), class: "small" %>
           <% end %>
         </li>
+        <% if user_signed_in? %>
+        <li>
+          <a href="<%= settings_path %>" class="small"><span class="glyphicon glyphicon-cog"></span></a>
+        </li>
+        <% end %>
       </ul>
     </div>
   </div>

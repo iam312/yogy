@@ -1,0 +1,90 @@
+<%= javascript_tag do %>
+  jQuery(document).ajaxSend(function(e, xhr, options) {
+  var token = jQuery("meta[name='csrf-token']").attr("content");
+  xhr.setRequestHeader("X-CSRF-Token", token);
+  });
+<% end %>
+<div class="row">
+  <div class="col-md-2">
+    <ul class="list-group">
+      <li class="list-group-item yogy_tone" id='toggler_profile'>modify profile</li>
+      <li class="list-group-item yogy_tone" id='toggler_account'>delete account</li>
+    </ul>
+  </div>
+  <div class="col-md-4">
+      <div id="block_profile" class="hidden">
+    <form id="form_profile">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="enter name" id="profile_name" value="<%= current_user.name %>"> 
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="enter email" id="profile_email" value="<%= current_user.email %>"> 
+        </div>
+        <button class="btn btn-danger" type="button" id="modify_profile">update</button>
+        <div id="profile_help_block" class="text-success hidden">
+          <br/>
+          <p>Update successfully.</p>
+        </div>
+    </form>
+      </div>
+      <div id="block_account" class="hidden">
+        delete, cancel
+      </div>
+  </div>
+</div>
+
+<script>
+$("#toggler_profile").click( function(e) {
+  $("#block_profile").removeClass("hidden");
+  $("#block_account").addClass("hidden");
+} );
+
+$("#toggler_account").click( function(e) {
+  $("#block_account").removeClass("hidden");
+  $("#block_profile").addClass("hidden");
+} );
+
+
+$("#profile_name").focus( function(e) {
+  $("#profile_help_block").addClass("hidden");
+} );
+
+$("#profile_email").focus( function(e) {
+  $("#profile_help_block").addClass("hidden");
+} );
+
+$("#profile_email").focus( function(e) {
+} );
+
+
+$("#modify_profile").click( function(e) {
+  if ($("#profile_name").val() == "" ) {
+    $("#profile_name").focus();
+    return;
+  }
+
+  if ($("#profile_email").val() == "" ) {
+    $("#profile_email").focus();
+    return;
+  }
+
+  var jqxhr = $.post( "<%= settings_path() %>",
+      { name: $( "#profile_name" ).val(),
+        email: $( "#profile_email" ).val()
+      },
+  function( result ) {
+    if (result["is_success"] == true) {
+      //$("#dislike_count").replaceWith(result["dislike_count"]);
+      //$("#dislike").prop('disabled', true);
+      $("#profile_help_block").removeClass("hidden");
+    } else {
+      alert('update fail');
+    }
+  })
+  .fail(function() {
+    alert( "error" );
+  });
+} );
+
+</script>
+

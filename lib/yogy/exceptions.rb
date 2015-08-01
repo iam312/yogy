@@ -6,5 +6,6 @@ module Yogy
     class UserDisabled < StandardError; end
     class AlreadyLiked < StandardError; end
     class AlreadyDisliked < StandardError; end
+    class InternalError < StandardError; end
   end
 end
