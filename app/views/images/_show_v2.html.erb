@@ -30,7 +30,7 @@
 </style>
 
 <% content_for :head do %>
-<meta property="og:title" content="<%= @image.title %>" />
+<meta property="og:title" content="<%= @image.yogies %>" />
 <meta property="og:site_name" content="Yogy"/>
 <meta property="og:url" content="<%= request.url %>" />
 <meta property="og:description" content="<%= @image.desc.gsub("\n", " ") %>" />
@@ -40,7 +40,6 @@
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:locale:alternate" content="en_US" />
 <meta property="article:author" content="<%= @image.user.name %>" />
-<meta property="article:publisher" content="<%= @image.user.name %>" />
 <% end %>
 
 <div class="jumbotron">
