@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   get 'settings', to: 'settings#index'
   post 'settings', to: 'settings#ajax_update_profile'
+  delete 'settings', to: 'settings#ajax_delete_me'
 
   root to: 'yogy#index_v4'
 end

@@ -19,12 +19,28 @@ class SettingsController < ApplicationController
       is_success = false
     end
 
+    render :json => {
+      is_success: is_success, 
+    }
+  end
 
+
+  def ajax_delete_me
+    is_success = true
+
+    begin
+      Image.transaction do
+        Image.where( user_id: current_user.id ).update_all( deleted: 1 )
+        User.destroy( current_user.id )
+      end
+    rescue => e
+      Rails.logger.error( e )
+      is_success = false
+    end
 
     render :json => {
       is_success: is_success, 
     }
-
   end
 end
 

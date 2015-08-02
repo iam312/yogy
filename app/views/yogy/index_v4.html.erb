@@ -43,6 +43,7 @@
 <% @yogies.each do |yogy| %>
   <% extra = Yogies.extra_by_images( yogy[:images] ) %>
   <% yogy_image = yogy[:images].shuffle.first %>
+  <% unless yogy_image.blank? %>
   <div class="col-md-6 col-lg-6 col-margin">
     <a href="<%= image_path( yogy_image ) %>">
       <%= responsive_image_tag( yogy_image, class: "yogy_img title img-responsive" ) %>
@@ -70,6 +71,7 @@
       </div>
     </div>
   </div>
+  <% end %>
 <% end %>
 </div>
 

@@ -1,3 +1,4 @@
+<div id="fb-root"></div>
 <%= javascript_tag do %>
   jQuery(document).ajaxSend(function(e, xhr, options) {
   var token = jQuery("meta[name='csrf-token']").attr("content");
@@ -28,12 +29,24 @@
     </form>
       </div>
       <div id="block_account" class="hidden">
-        delete will be here.
+      <p id="delete_me" class="yogy_tone">Yes, delete me.</p>
       </div>
   </div>
 </div>
 
 <script>
+$(document).ready(function() {
+  $.ajaxSetup({ cache: false });
+  $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+      FB.init({
+        appId   : '<%= ENV["FB_APP_ID"] %>',
+        status  : true,
+        xfbml   : true,
+        version : 'v2.4' // or v2.0, v2.1, v2.0
+      });     
+  });
+});
+
 $("#toggler_profile").click( function(e) {
   $("#block_profile").removeClass("hidden");
   $("#block_account").addClass("hidden");
@@ -82,6 +95,31 @@ $("#modify_profile").click( function(e) {
   .fail(function() {
     alert( "error" );
   });
+} );
+
+
+$("#delete_me").click( function(e) {
+  $.ajax({
+    url: '<%= settings_path() %>',
+    type: 'DELETE',
+    success: function(result) {
+      if (result["is_success"] == true) {
+
+        // delete fb permission;
+        FB.api('/me/permissions', 'delete', function(response) {
+          if (response.success == true) {
+            window.location.href = '<%= sign_out_path() %>';
+          } else {
+            alert('Error revoking app');
+          }
+        });
+
+      } else {
+        alert('fail to delete');
+      }
+    }
+  });
+
 } );
 
 </script>

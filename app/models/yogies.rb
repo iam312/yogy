@@ -7,7 +7,7 @@ class Yogies < ActiveRecord::Base
     result = []
 
     Rails.cache.fetch( 'index', :expires_in => 1.minutes ) do
-      yogies = group( :title ).count.sort_by {|_key, value| value}.reverse.take(5)
+      yogies = group( :title ).count.sort_by {|key, value| value}.reverse.take(5)
       yogies.each do |yogy|
         title = yogy[0]
         count = yogy[1]
