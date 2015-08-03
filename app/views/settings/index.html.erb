@@ -36,7 +36,7 @@
 
 <script>
 $(document).ready(function() {
-  $.ajaxSetup({ cache: false });
+  $.ajaxSetup({ cache: true });
   $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
       FB.init({
         appId   : '<%= ENV["FB_APP_ID"] %>',
