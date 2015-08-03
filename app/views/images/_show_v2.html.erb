@@ -36,7 +36,6 @@
 
 <% content_for :head do %>
 <meta property="og:title" content="<%= @image.yogies %>" />
-<meta property="og:site_name" content="Yogy"/>
 <meta property="og:url" content="<%= request.url %>" />
 <meta property="og:description" content="<%= @image.desc.gsub("\n", " ") %>" />
 <meta property="fb:app_id" content="<%= ENV["FB_APP_ID"] %>" />
