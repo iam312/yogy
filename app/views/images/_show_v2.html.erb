@@ -118,6 +118,32 @@ $( ".yogy_img" ).load( function() {
 
 });
 
+
+$(".yogy_img").click( function(e) {
+  var side = -1;
+  if ( e.pageX < ($(this).width() / 3) ) {
+    side = 0;
+  }
+
+  if ( e.pageX > ($(this).width() / 3) * 2 ) {
+    side = 1;
+  }
+
+  var url_prev = "<%= image_nav_path( @image, 'prev' ) %>";
+  var url_next = "<%= image_nav_path( @image, 'next' ) %>";
+  var url = ""
+  if (side == 0) {
+    url = url_prev;
+  } else if (side == 1) {
+    url = url_next;
+  }
+
+  if (url != "") {
+    window.location.href = url;
+  }
+} );
+
+
 $(document).ajaxSend(function(e, xhr, options) {
   var token = $("meta[name='csrf-token']").attr("content");
   xhr.setRequestHeader("X-CSRF-Token", token);
