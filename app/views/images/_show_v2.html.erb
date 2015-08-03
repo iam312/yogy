@@ -1,8 +1,13 @@
 <div id="fb-root"></div>
 <script>
+  var language = window.navigator.userLanguage || window.navigator.language;
+  var sdk_url = '//connect.facebook.net/en_US/sdk.js';
+  if (language == "ko") {
+    sdk_url = '//connect.facebook.net/ko_KR/sdk.js'
+  }
   $(document).ready(function() {
     $.ajaxSetup({ cache: true });
-    $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+    $.getScript( sdk_url, function(){
         FB.init({
           appId   : '<%= ENV["FB_APP_ID"] %>',
           status  : true,
