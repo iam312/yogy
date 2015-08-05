@@ -33,6 +33,20 @@ class ImagesController < ApplicationController
   end
 
   def destroy
+    is_success = true
+    begin
+      image = Image.find params[:id]
+      if image.user_id == current_user.id
+        image.deleted = 1 
+        image.save!
+      end
+    rescue
+      is_success = false
+    end
+
+    render :json => {
+      is_success: is_success
+    }
   end
 
   def show

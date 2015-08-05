@@ -51,7 +51,11 @@
   <h5><small id="exif"></small></h5>
   <br />
   <h3><%= raw link_yogies(@image.yogies) %></h3>
-  <h5 class="text-right"><%= link_to @image.user.name, image_filter_by_user_path( @image.user.id ) %>님이 <%= @image.created_at %>에 등록했습니다.</h5>
+  <h5 class="text-right"><%= link_to @image.user.name, image_filter_by_user_path( @image.user.id ) %>님이 <%= @image.created_at %>에 등록했습니다.
+  <% if not current_user.nil? and current_user.id == @image.user_id %>
+    <span id="remove" class="glyphicon glyphicon-remove yogy_tone yogy_hand"></span>
+  <% end %>
+  </h5> 
   <br />
   <span id="description_edit" class="hidden">
     <span id="save_description" class="glyphicon glyphicon-ok yogy_tone yogy_hand"></span>
@@ -228,6 +232,21 @@ $("#dislike").click( function(e) {
   <% else %>
   ajax_save_dislike();
   <% end %>
+} );
+
+$("#remove").click( function(e) {
+  $.ajax({
+    url: '<%= image_path( @image ) %>',
+    type: 'DELETE',
+    success: function(result) {
+      if (result["is_success"] == true) {
+        window.location.href = window.history.back();
+      } else {
+        alert('fail to delete');
+      }
+    }
+  });
+
 } );
 
 </script>
