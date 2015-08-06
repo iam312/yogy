@@ -15,3 +15,6 @@ env:
     # for fb
     - secure: "kLZx917r0DlCd/28muD30brrozAfhpP+TzmGUXJsEMtrAwg1M+2pU+k6omTIFctpkPhV/Qb7Xav6K/8JCXjW6vFho0koaJMx2VZr81f2pLDP9N4A9dcKEpLyA68ATVlzBQYYCU5CYiWTiOs0RZ7AYjiJ7iRe2FS3UtC3KF7ivN0="
     - secure: "D4eUWX3SZOU11AZqedaNjyKyPjLsKaLQ8/L3XktWb0DeeuaCW1QTo8tQwGUsVwL9ArGg3v6pONu5j2MzxI2KVP0SOFyN4FjIhRB5Bll94dVdwBuQzi4j4v3yAU/5G/o7OY/9IBFzTAbzlrbMcsMvXRTc4OIzEf+Rn9S7FyKpRmA="
+
+notifications:
+    slack: yogy5:tWaVkuAaN42TDtVZluCpsVQU
