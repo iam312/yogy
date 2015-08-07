@@ -52,7 +52,7 @@ module ApplicationHelper
       yogy = item[0]
       extra = item[1]
       result += "#{link_to( yogy.strip, yogy_path( yogy.strip.gsub('#', '') ) )}"
-      result += "<sup><span class='badge'>#{extra[:count]}</span></sup> " if extra[:count] > 1
+      result += "<sup><span class='badge'>#{extra[:count] - 1}</span></sup> " if extra[:count] > 1
       seasons = ""
       extra[:seasons].each_with_index do |season, idx|
         seasons += link_season_text( season - 1 )
