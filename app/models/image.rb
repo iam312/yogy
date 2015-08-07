@@ -17,6 +17,30 @@ class Image < ActiveRecord::Base
     yogies.split('#').drop(1).map { |item| item[/[[:word:] ]+/].strip.gsub(/\s+/, '_') }
   end
 
+  def yogies_with_picture_count
+    yogies = yogies_to_array
+    result = {}
+    yogies.each do | yogy |
+      yogy_records = Yogies.where( title: yogy )
+      years = []
+      seasons = []
+      images = Image.where( id: yogy_records.map{ |y| y.image_id } )
+      images.each do |image|
+        begin
+          exif = JSON.parse( image.exif, :symbolize_names => true )
+          years << exif[:create_date].split(":")[0].to_i
+          seasons << image.season unless image.season.blank?
+        rescue
+        end
+      end
+      result[yogy] = { seasons: seasons.uniq.sort,
+                       years: years.uniq.sort.reverse,
+                       count: yogy_records.count }
+    end
+
+    result
+  end
+
   def self.generate_yogies_with_images( images )
     yogies = {}
     images.each do |image|

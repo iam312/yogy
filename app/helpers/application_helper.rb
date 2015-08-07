@@ -1,4 +1,7 @@
 module ApplicationHelper
+  SEASONS_TEXT = [ 'spring', 'summer', 'autumn', 'winter' ]
+  SEASONS_ING = [ 'spring-25.png', 'summer-25.png', 'autumn-25.png', 'winter-25.png' ]
+
   def responsive_image_tag( *argvs )
     image = nil
     etc = {}
@@ -43,19 +46,40 @@ module ApplicationHelper
     result
   end
 
+  def link_yogies_with_picture_count( yogies )
+    result = "<h3>"
+    yogies.each_with_index do | item, idx |
+      yogy = item[0]
+      extra = item[1]
+      result += "#{link_to( yogy.strip, yogy_path( yogy.strip.gsub('#', '') ) )}"
+      result += "<sup><span class='badge'>#{extra[:count]}</span></sup> " if extra[:count] > 1
+      seasons = ""
+      extra[:seasons].each_with_index do |season, idx|
+        seasons += link_season_text( season - 1 )
+        seasons += ", " if idx + 1 < extra[:seasons].size
+      end
+      result += "<small>#{seasons} | </small>" unless seasons.blank?
+
+      years = ""
+      extra[:years].each_with_index do |year, idx|
+        years += year.to_s
+        years += ", " if idx + 1 < extra[:years].size
+      end
+      result += "<small>#{years}</small>" unless years.blank?
+      result += ", " if idx + 1 < yogies.size
+    end
+
+    result + "</h3>"
+  end
+
   def link_season( season )
     return "" if season.blank?
-    #seasons = [ 'spring', 'summer', 'autumn', 'winter' ]
-    seasons = [ 'spring-25.png', 'summer-25.png', 'autumn-25.png', 'winter-25.png' ]
-    
-    image_tag( "#{seasons[ season - 1 ]}", size: "16x16" )
+    image_tag( "#{SEASONS_ING[ season - 1 ]}", size: "16x16" )
   end
 
   def link_season_text( season )
     return "" if season.blank?
-    seasons = [ 'spring', 'summer', 'autumn', 'winter' ]
-    
-    I18n.t( "common.season.#{seasons[ season - 1 ]}" )
+    I18n.t( "common.season.#{SEASONS_TEXT[ season - 1 ]}" )
   end
 
   def link_season_with_yogy( season, yogy )
