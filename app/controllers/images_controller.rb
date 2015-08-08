@@ -1,10 +1,16 @@
 class ImagesController < ApplicationController
+  include ApplicationHelper
+  include ActionView::Helpers::OutputSafetyHelper
+  include ActionView::Helpers::UrlHelper
+  include ActionView::Helpers::TextHelper
+
   before_action :authenticate_user!, only: [:new, :create, :destroy, :ajax_save_description,
                                             :image_like, :image_dislike, :image_cancel_like, :image_cancel_dislike,]
   before_action :showable!, only: [:show, ]
 
   def index
-    @images = Image.all_images( 0, 100 )
+    @next_offset = ENV["LIST_LIMIT"].to_i
+    @images = Image.all_images( 0, @next_offset )
   end
 
   def new
@@ -62,6 +68,32 @@ class ImagesController < ApplicationController
     
     Image.increment_counter( :view_count, id )
     @image = Image.find_by_id( id )
+  end
+
+  def ajax_load_more
+    is_success = true
+    images = []
+    html = ""
+    next_offset = 0
+    begin
+      offset = params[:offset].to_i
+      next_offset = params[:offset].to_i + ENV["LIST_LIMIT"].to_i
+      images = Image.all_images( offset, ENV["LIST_LIMIT"].to_i )
+
+      fp = File.open( "app/views/images/_list.html.erb" )
+      template = fp.read
+      fp.close
+      
+      html = ERB.new(template).result(binding)
+    rescue => e
+      is_success = false;
+    end
+
+    render :json => {
+      is_success: is_success,
+      html: html,
+      next_offset: next_offset
+    }
   end
 
   def ajax_save_description

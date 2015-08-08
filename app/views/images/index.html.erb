@@ -1,1 +1,32 @@
+<div class="row" id="list">
 <%= render partial: 'list', locals: {images: @images}  %>
+</div>
+<button id="load_more" class="btn btn-default yogy_tone" type="button" data-next-offset="<%= @next_offset %>">load more</button>
+
+<script>
+$(document).ajaxSend(function(e, xhr, options) {
+  var token = $("meta[name='csrf-token']").attr("content");
+  xhr.setRequestHeader("X-CSRF-Token", token);
+});
+
+function load_more() {
+  var offset = $("#load_more").data("nextOffset");
+
+  var jqxhr = $.post( "<%= image_load_more_path() %>",
+    {offset: offset}, 
+    function( result ) {
+      if (result["is_success"] == true) {
+        $("#list").append( result["html"] );
+        img_lazyload();
+        $("#load_more").data("nextOffset", result["next_offset"]);
+        $("#load_more").blur();
+      }
+    });
+}
+
+$("#load_more").click( function(e) {
+  load_more();
+} );
+
+</script>
+

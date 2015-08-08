@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post 'images/:id/dislike' => 'images#ajax_dislike', as: 'image_dislike'
   post 'images/:id/cancel_like' => 'images#ajax_cancel_like', as: 'image_cancel_like'
   post 'images/:id/cancel_dislike' => 'images#ajax_cancel_dislike', as: 'image_cancel_dislike'
+  post 'images/load_more' => 'images#ajax_load_more', as: 'image_load_more'
 
   resources 'yogy', param: :title
   get 'yogy/:title/season/:season' => 'yogy#show', as: 'yogy_season'
