@@ -4,4 +4,43 @@
   </div>
 </div>
 
+<div class="row" id="list">
 <%= render partial: 'list', locals: {images: @images}  %>
+</div>
+
+<div><br/><br/></div>
+<div class="text-center">
+<button id="load_more" class="btn btn-default yogy_tone" type="button" data-next-offset="<%= @next_offset %>", data-user-id="<%= params[:user_id] %>">load more</button>
+</div>
+<div><br/><br/></div>
+
+<script>
+$(document).ajaxSend(function(e, xhr, options) {
+  var token = $("meta[name='csrf-token']").attr("content");
+  xhr.setRequestHeader("X-CSRF-Token", token);
+});
+
+function load_more() {
+  var offset = $("#load_more").data("nextOffset");
+  var user_id = $("#load_more").data("userId");
+
+  var jqxhr = $.post( "<%= image_load_more_path() %>",
+      {offset: offset,
+       user_id: user_id,
+       method: "filter_by_user"}, 
+    function( result ) {
+      if (result["is_success"] == true) {
+        $("#list").append( result["html"] );
+        img_lazyload();
+        $("#load_more").data("nextOffset", result["next_offset"]);
+        $("#load_more").blur();
+      }
+    });
+}
+
+$("#load_more").click( function(e) {
+  load_more();
+} );
+
+</script>
+

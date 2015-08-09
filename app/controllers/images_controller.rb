@@ -70,6 +70,14 @@ class ImagesController < ApplicationController
     @image = Image.find_by_id( id )
   end
 
+  def _load_more_all_images( offset )
+    Image.all_images( offset, ENV["LIST_LIMIT"].to_i )
+  end
+
+  def _load_more_filter_by_user( offset )
+    Image.filter_by_user( params[:user_id], offset, ENV["LIST_LIMIT"].to_i )
+  end
+
   def ajax_load_more
     is_success = true
     images = []
@@ -78,7 +86,9 @@ class ImagesController < ApplicationController
     begin
       offset = params[:offset].to_i
       next_offset = params[:offset].to_i + ENV["LIST_LIMIT"].to_i
-      images = Image.all_images( offset, ENV["LIST_LIMIT"].to_i )
+
+      method = "_load_more_#{params[:method]}"
+      images = send(method, *[offset])
 
       fp = File.open( "app/views/images/_list.html.erb" )
       template = fp.read
@@ -169,8 +179,11 @@ class ImagesController < ApplicationController
 
 
   def filter_by_user
-    @images = Image.filter_by_user( params[:user_id], 0, 100 )
-    @yogies_string = Image.generate_yogies_with_images( @images ).map{ |v| "##{v}" }.join(",")
+    @next_offset = ENV["LIST_LIMIT"].to_i
+    images = Image.filter_by_user( params[:user_id], 0, 999999 )
+    @yogies_string = Image.generate_yogies_with_images( images ).map{ |v| "##{v}" }.join(",")
+
+    @images = Image.filter_by_user( params[:user_id], 0, @next_offset )
     @user = User.find params[:user_id]
   end
 

@@ -1,7 +1,11 @@
 <div class="row" id="list">
 <%= render partial: 'list', locals: {images: @images}  %>
 </div>
+<div><br/><br/></div>
+<div class="text-center">
 <button id="load_more" class="btn btn-default yogy_tone" type="button" data-next-offset="<%= @next_offset %>">load more</button>
+</div>
+<div><br/><br/></div>
 
 <script>
 $(document).ajaxSend(function(e, xhr, options) {
@@ -13,7 +17,8 @@ function load_more() {
   var offset = $("#load_more").data("nextOffset");
 
   var jqxhr = $.post( "<%= image_load_more_path() %>",
-    {offset: offset}, 
+      {offset: offset,
+       method: "all_images"}, 
     function( result ) {
       if (result["is_success"] == true) {
         $("#list").append( result["html"] );
