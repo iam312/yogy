@@ -14,14 +14,46 @@
   </div>
 </div>
 
-<div class="row">
-<% @yogies.each do |yogy| %>
-  <div class="col-xs-6 col-md-3">
-    <div class="panel">
-      <a href="<%= image_path( yogy.image ) %>">
-      <%= responsive_image_tag(yogy.image, class: "yogy_img xsmall") %>
-      </a>
-    </div>
-  </div>
-<% end %>
+<div class="row", id="list">
+<%= render partial: 'list', locals: {yogies: @yogies}  %>
 </div>
+
+<div><br/><br/></div>
+<div class="text-center">
+  <button id="load_more" class="btn btn-default yogy_tone" type="button" data-next-offset="<%= @next_offset %>" data-title="<%= params[:title] %>" data-season="<%= params[:season] %>", data-year="<%= params[:year] %>">load more</button>
+</div>
+<div><br/><br/></div>
+
+<script>
+$(document).ajaxSend(function(e, xhr, options) {
+  var token = $("meta[name='csrf-token']").attr("content");
+  xhr.setRequestHeader("X-CSRF-Token", token);
+});
+
+function load_more() {
+  var offset = $("#load_more").data("nextOffset");
+  var title = $("#load_more").data("title");
+  var season = $("#load_more").data("season");
+  var year = $("#load_more").data("year");
+
+  var jqxhr = $.post( "<%= yogy_load_more_path() %>",
+      {offset: offset,
+       title: title,
+       season: season,
+       year: year,
+       method: "yogies"},
+    function( result ) {
+      if (result["is_success"] == true) {
+        $("#list").append( result["html"] );
+        img_lazyload();
+        $("#load_more").data("nextOffset", result["next_offset"]);
+        $("#load_more").blur();
+      }
+    });
+}
+
+$("#load_more").click( function(e) {
+  load_more();
+} );
+
+</script>

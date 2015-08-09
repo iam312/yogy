@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get 'yogy/:title/season/:season' => 'yogy#show', as: 'yogy_season'
   get 'yogy/:title/year/:year' => 'yogy#show', as: 'yogy_year'
   get 'yogy/:title/season/:season/year/:year' => 'yogy#show', as: 'yogy_season_year'
+  post 'yogy/load_more' => 'yogy#ajax_load_more', as: 'yogy_load_more'
+
 
   get 'index_v2', to: 'yogy#index_v2'
   get 'index_v3', to: 'yogy#index_v3'

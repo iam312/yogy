@@ -10,7 +10,7 @@ class ImagesController < ApplicationController
 
   def index
     @next_offset = ENV["LIST_LIMIT"].to_i
-    @images = Image.all_images( 0, @next_offset )
+    @images = _load_more_all_images(0)
   end
 
   def new
@@ -70,12 +70,12 @@ class ImagesController < ApplicationController
     @image = Image.find_by_id( id )
   end
 
-  def _load_more_all_images( offset )
-    Image.all_images( offset, ENV["LIST_LIMIT"].to_i )
+  def _load_more_all_images( offset, limit = ENV["LIST_LIMIT"].to_i )
+    Image.all_images( offset, limit)
   end
 
-  def _load_more_filter_by_user( offset )
-    Image.filter_by_user( params[:user_id], offset, ENV["LIST_LIMIT"].to_i )
+  def _load_more_filter_by_user( offset, limit = ENV["LIST_LIMIT"].to_i  )
+    Image.filter_by_user( params[:user_id], offset, limit )
   end
 
   def ajax_load_more
@@ -96,7 +96,8 @@ class ImagesController < ApplicationController
       
       html = ERB.new(template).result(binding)
     rescue => e
-      is_success = false;
+      Rails.logger.error(e)
+      is_success = false
     end
 
     render :json => {
@@ -180,10 +181,9 @@ class ImagesController < ApplicationController
 
   def filter_by_user
     @next_offset = ENV["LIST_LIMIT"].to_i
-    images = Image.filter_by_user( params[:user_id], 0, 999999 )
+    images = _load_more_filter_by_user( 0, 9999999 )
     @yogies_string = Image.generate_yogies_with_images( images ).map{ |v| "##{v}" }.join(",")
-
-    @images = Image.filter_by_user( params[:user_id], 0, @next_offset )
+    @images = images.offset(0).limit(@next_offset)
     @user = User.find params[:user_id]
   end
 
