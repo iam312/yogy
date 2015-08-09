@@ -27,6 +27,7 @@ en:
       summer: 'Summer'
       autumn: 'Autumn'
       winter: 'Winter'
+    load_more: 'Load more'
   images:
     new:
       title: 'title'

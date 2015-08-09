@@ -5,6 +5,7 @@ ko:
       summer: '여름'
       autumn: '가을'
       winter: '겨울'
+    load_more: '더보기'
   images:
     new:
       title: '제목'
