@@ -1,6 +1,6 @@
 module ApplicationHelper
   SEASONS_TEXT = [ 'spring', 'summer', 'autumn', 'winter' ]
-  SEASONS_ING = [ 'spring-25.png', 'summer-25.png', 'autumn-25.png', 'winter-25.png' ]
+  SEASONS_IMG = [ 'spring-25.png', 'summer-25.png', 'autumn-25.png', 'winter-25.png' ]
 
   def responsive_image_tag( *argvs )
     image = nil
@@ -74,7 +74,7 @@ module ApplicationHelper
 
   def link_season( season )
     return "" if season.blank?
-    image_tag( "#{SEASONS_ING[ season - 1 ]}", size: "16x16" )
+    image_tag( "#{SEASONS_IMG[ season - 1 ]}", size: "16x16" )
   end
 
   def link_season_text( season )
@@ -84,11 +84,10 @@ module ApplicationHelper
 
   def link_season_with_yogy( season, yogy )
     return "" if (season.blank? or yogy.blank?)
-    seasons_name = [ 'spring', 'summer', 'autumn', 'winter' ]
-    seasons = [ 'spring-25.png', 'summer-25.png', 'autumn-25.png', 'winter-25.png' ]
-    
+    #seasons = [ 'spring-25.png', 'summer-25.png', 'autumn-25.png', 'winter-25.png' ]
     #link_to image_tag( "#{seasons[ season - 1 ]}", size: "16x16", class: "yogy_hand yogy_tone" ), yogy_season_path( yogy, seasons_name[season - 1] )
-    link_to seasons_name[season - 1], yogy_season_path( yogy, seasons_name[season - 1] )
+
+    link_to I18n.t( "common.season.#{SEASONS_TEXT[ season - 1 ]}" ), yogy_season_path( yogy, SEASONS_TEXT[ season - 1 ] )
   end
 
   def link_year( year )

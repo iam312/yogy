@@ -32,6 +32,7 @@ gem 'jquery-turbolinks'
 gem 'bootstrap-sass'
 gem 'sass-rails'
 gem 'uglifier'
+gem 'http_accept_language'
 
 group :development do
   gem 'guard-ctags-bundler'

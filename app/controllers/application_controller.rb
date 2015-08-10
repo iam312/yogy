@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include HttpAcceptLanguage::AutoLocale
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -8,6 +10,7 @@ class ApplicationController < ActionController::Base
     rescue_from ::Yogy::Exceptions::ImageDeleted, with: :render_image_deleted
     rescue_from ::Yogy::Exceptions::UserDisabled, with: :render_user_disabled
   #end 
+
 
   private
 
