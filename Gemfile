@@ -33,6 +33,7 @@ gem 'bootstrap-sass'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'http_accept_language'
+gem 'browser-timezone-rails'
 
 group :development do
   gem 'guard-ctags-bundler'
