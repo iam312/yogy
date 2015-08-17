@@ -34,3 +34,9 @@ bower.json
 
 # Ignore application configuration
 /config/application.yml
+
+# sublime
+*sublime-*
+
+# vim
+tags
