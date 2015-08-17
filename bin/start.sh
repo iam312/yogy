@@ -13,6 +13,4 @@ if [ -f tmp/pids/server.pid ]; then
   kill `cat tmp/pids/server.pid`
 fi
 
-/usr/local/opt/memcached/bin/memcached &
-mysql.server start
-bin/rails s
+RAILS_ENV=alpha bin/rails s
