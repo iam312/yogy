@@ -12,18 +12,18 @@ module ApplicationHelper
 
     str = ""
     etc.each do |k, v|
-      str += " #{k}='#{v}'" 
+      str += " #{k}='#{v}'"
     end
 
-    raw "<img src=\"\" 
-              data-src-xsmall=\"#{Rails.application.routes.url_helpers.dn_path(image, 'xsmall')}\" 
-              data-src-small=\"#{Rails.application.routes.url_helpers.dn_path(image, 'small')}\" 
-              data-src-normal=\"#{Rails.application.routes.url_helpers.dn_path(image, 'normal')}\" 
-              data-src-orig=\"#{Rails.application.routes.url_helpers.dn_path(image, 'orig')}\" 
-              role=\"img\" aria-label=\"\" 
+    raw "<img src=\"\"
+              data-src-xsmall=\"#{Rails.application.routes.url_helpers.dn_path(image, 'xsmall')}\"
+              data-src-small=\"#{Rails.application.routes.url_helpers.dn_path(image, 'small')}\"
+              data-src-normal=\"#{Rails.application.routes.url_helpers.dn_path(image, 'normal')}\"
+              data-src-orig=\"#{Rails.application.routes.url_helpers.dn_path(image, 'orig')}\"
+              role=\"img\" aria-label=\"\"
               #{str}
         />"
-         
+
   end
 
   def dn_url( image, target )
@@ -47,7 +47,7 @@ module ApplicationHelper
   end
 
   def link_yogies_with_picture_count( yogies )
-    result = "<h3>"
+    result = "<h3 id='yogies'>"
     yogies.each_with_index do | item, idx |
       yogy = item[0]
       extra = item[1]

@@ -1,19 +1,26 @@
 development: &development
   adapter: mysql2
-  host: localhost
-  username: root
-  password: 
-  database: yogy_development
+  host: <%= ENV["DB_HOST"] %>
+  username: <%= ENV["DB_USER"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  database: <%= ENV["DB_NAME"] %>
 
 test:
   <<: *development
   database: yogy_test
 
+alpha: &alpha
+  <<: *development
+  host: <%= ENV["DB_HOST"] %>
+  username: <%= ENV["DB_USER"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  database: <%= ENV["DB_NAME"] %>
+
 production:
   <<: *development
   adapter: postgresql
-  host: ec2-23-23-199-181.compute-1.amazonaws.com 
-  username: rwosxxenbibxss
-  password: kdAiNul4YvdffGa9azug-o-lbX
-  database: dfbm9ktrpg2qpp
+  host: <%= ENV["DB_HOST"] %>
+  username: <%= ENV["DB_USER"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  database: <%= ENV["DB_NAME"] %>
 

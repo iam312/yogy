@@ -13,7 +13,7 @@
           status  : true,
           xfbml   : true,
           version : 'v2.4' // or v2.0, v2.1, v2.0
-        });     
+        });
     });
   });
 
@@ -50,15 +50,19 @@
   <div id="img_nav"><%= responsive_image_tag(@image, class: "yogy_img title") %></div>
   <h5><small id="exif"></small></h5>
   <br />
+  <% if not current_user.nil? and current_user.id == @image.user_id %>
+    <span id="modify_yogy" class="glyphicon glyphicon-pencil yogy_tone"></span>
+    <h3 style="display:none" id='yogies_editor'><%= text_field_tag 'field_yogies' %></h3>
+  <% end %>
   <%= raw link_yogies_with_picture_count(@image.yogies_with_picture_count) %>
   <h5 class="text-right"><%= link_to @image.user.name, image_filter_by_user_path( @image.user.id ) %>님이 <%= @image.created_at %>에 등록했습니다.
   <% if not current_user.nil? and current_user.id == @image.user_id %>
-    <span id="remove" class="glyphicon glyphicon-remove yogy_tone yogy_hand"></span>
+    <span id="remove" class="glyphicon glyphicon-trash yogy_tone"></span>
   <% end %>
-  </h5> 
+  </h5>
   <br />
   <span id="description_edit" class="hidden">
-    <span id="save_description" class="glyphicon glyphicon-ok yogy_tone yogy_hand"></span>
+    <span id="save_description" class="glyphicon glyphicon-ok yogy_tone"></span>
     <%= text_area_tag 'desc', @image.desc, rows: 10, style: "width:100%" %>
   </span>
   <span id="description">
@@ -93,7 +97,7 @@ $( ".yogy_img" ).load( function() {
     } else {
       exposure_time_str = "1/" + (1.0/exposure_time) + "sec | "
     }
-    
+
     var message = exif_data.Artist + " | " +
                   exif_data.Copyright + "<br/>" +
                   exif_data.DateTimeOriginal + " | " +
@@ -204,7 +208,7 @@ function ajax_save_dislike() {
     alert( "error" );
   });
 }
-  
+
 function toggle_edit() {
   $("#description").toggleClass("hidden");
   $("#description_edit").toggleClass("hidden");
@@ -212,6 +216,11 @@ function toggle_edit() {
 
 $("#modify_description").click( function(e) {
   toggle_edit();
+} );
+
+$("#modify_yogy").click( function(e) {
+  $("#yogies_editor").toggle();
+  $("#yogies").toggle();
 } );
 
 $("#save_description").click( function(e) {
