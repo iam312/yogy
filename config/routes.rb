@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources 'images'
   get 'images/filter/user/:user_id' => 'images#filter_by_user', as: 'image_filter_by_user'
   get 'images/:id/nav/:nav' => 'images#show', as: 'image_nav'
+  post 'images/:id/save_yogies' => 'images#ajax_save_yogies', as: 'image_save_yogies'
   post 'images/:id/save_desc' => 'images#ajax_save_description', as: 'image_save_description'
   post 'images/:id/like' => 'images#ajax_like', as: 'image_like'
   post 'images/:id/dislike' => 'images#ajax_dislike', as: 'image_dislike'

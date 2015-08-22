@@ -47,7 +47,12 @@ module ApplicationHelper
   end
 
   def link_yogies_with_picture_count( yogies )
-    result = "<h3 id='yogies'>"
+    result = "<div id='yogies'>"
+    if not current_user.nil? and current_user.id == @image.user_id
+      result += '<span id="modify_yogy" class="glyphicon glyphicon-pencil yogy_tone"></span>'
+    end
+
+    result += "<h3>"
     yogies.each_with_index do | item, idx |
       yogy = item[0]
       extra = item[1]
@@ -69,7 +74,7 @@ module ApplicationHelper
       result += ", " if idx + 1 < yogies.size
     end
 
-    result + "</h3>"
+    result + "</h3></div>"
   end
 
   def link_season( season )

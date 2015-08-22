@@ -50,10 +50,10 @@
   <div id="img_nav"><%= responsive_image_tag(@image, class: "yogy_img title") %></div>
   <h5><small id="exif"></small></h5>
   <br />
-  <% if not current_user.nil? and current_user.id == @image.user_id %>
-    <span id="modify_yogy" class="glyphicon glyphicon-pencil yogy_tone"></span>
-    <h3 style="display:none" id='yogies_editor'><%= text_field_tag 'field_yogies' %></h3>
-  <% end %>
+  <span id="yogies_edit" class="hidden">
+    <span id="save_yogy" class="glyphicon glyphicon-ok yogy_tone"></span>
+    <h3 id='yogies_editor'><%= text_field_tag 'field_yogies', @image.yogies %></h3>
+  </span>
   <%= raw link_yogies_with_picture_count(@image.yogies_with_picture_count) %>
   <h5 class="text-right"><%= link_to @image.user.name, image_filter_by_user_path( @image.user.id ) %>님이 <%= @image.created_at %>에 등록했습니다.
   <% if not current_user.nil? and current_user.id == @image.user_id %>
@@ -67,7 +67,7 @@
   </span>
   <span id="description">
   <% if not current_user.nil? and current_user.id == @image.user_id %>
-    <span id="modify_description" class="glyphicon glyphicon-pencil yogy_tone yogy_hand"></span>
+    <span id="modify_description" class="glyphicon glyphicon-pencil yogy_tone"></span>
   <% end %>
     <address id="readonly_desc"><%= sanitize @image.desc.gsub("\n", "<br/>") %></address>
   </span>
@@ -161,15 +161,15 @@ $(document).ajaxSend(function(e, xhr, options) {
   xhr.setRequestHeader("X-CSRF-Token", token);
 });
 
-function ajax_save_description() {
-  var jqxhr = $.post( "<%= image_save_description_path(@image) %>", $( "#desc" ).serialize(),
+function ajax_save_yogies() {
+  var jqxhr = $.post( "<%= image_save_yogies_path(@image) %>", $( "#field_yogies" ).serialize(),
   function( result ) {
     //alert( "success" );
     if ( result["is_success"] == true ) {
       // text santinize 처리. 단지 보기 용도일 뿐이다.
       var toBeDisplayed = $("#desc").text($("#desc").val());
       $("#readonly_desc").html( toBeDisplayed.html().replace(/\n/g,"<br>") );
-      toggle_edit();
+      toggle_edit_yogies();
     }
   })
   .done(function() {
@@ -180,6 +180,26 @@ function ajax_save_description() {
   })
   .always(function() {
     //alert( "finished" );
+  });
+}
+
+function ajax_save_description() {
+  var jqxhr = $.post( "<%= image_save_description_path(@image) %>", $( "#desc" ).serialize(),
+  function( result ) {
+    //alert( "success" );
+    if ( result["is_success"] == true ) {
+      // text santinize 처리. 단지 보기 용도일 뿐이다.
+      var toBeDisplayed = $("#desc").text($("#desc").val());
+      $("#readonly_desc").html( toBeDisplayed.html().replace(/\n/g,"<br>") );
+      toggle_edit_desc();
+    }
+  })
+  .done(function() {
+  })
+  .fail(function() {
+    alert( "error" );
+  })
+  .always(function() {
   });
 }
 
@@ -209,18 +229,26 @@ function ajax_save_dislike() {
   });
 }
 
-function toggle_edit() {
+function toggle_edit_yogies() {
+  $("#yogies").toggleClass("hidden");
+  $("#yogies_edit").toggleClass("hidden");
+}
+
+function toggle_edit_desc() {
   $("#description").toggleClass("hidden");
   $("#description_edit").toggleClass("hidden");
 }
 
-$("#modify_description").click( function(e) {
-  toggle_edit();
+$("#modify_yogy").click( function(e) {
+  toggle_edit_yogies();
 } );
 
-$("#modify_yogy").click( function(e) {
-  $("#yogies_editor").toggle();
-  $("#yogies").toggle();
+$("#modify_description").click( function(e) {
+  toggle_edit_desc();
+} );
+
+$("#save_yogy").click( function(e) {
+  ajax_save_yogies();
 } );
 
 $("#save_description").click( function(e) {

@@ -14,7 +14,7 @@ class Image < ActiveRecord::Base
   scope :all_images, ->(offset, limit) { available_images.order('created_at desc').offset(offset).limit(limit) }
 
   def yogies_to_array
-    yogies.split('#').drop(1).map { |item| item[/[[:word:] ]+/].strip.gsub(/\s+/, '_') }
+    ::Yogy::Utils.yogies_to_array(yogies)
   end
 
   def yogies_with_picture_count
@@ -68,6 +68,44 @@ class Image < ActiveRecord::Base
 
       image.yogy_ids = yogy_ids.map(&:inspect).join(',')
       image.save!
+    end
+  end
+
+  def update_yogies!( current_user, yogies )
+    will_be_added_yogy_ids = []
+    will_be_deleted_yogy_ids = []
+    transaction do 
+      ## 현재 Yogies::hash_to_id 매핑 정보
+      tag_to_yogyid_map = {}
+      Yogies.where( { image_id: id } ).each{ |yogy| tag_to_yogyid_map[yogy.title] = yogy.id }
+
+
+      new_hash_tags = ::Yogy::Utils.yogies_to_array( yogies )
+      old_hash_tags = yogies_to_array
+
+      will_be_deleted_hash_tags = old_hash_tags - new_hash_tags
+      will_be_deleted_yogy_ids = tag_to_yogyid_map.select{ |r| r if will_be_deleted_hash_tags.include? r }.values
+
+      will_be_added_hash_tags = new_hash_tags - old_hash_tags
+
+      ## 추가될 tag 처리
+      will_be_added_hash_tags.each do |hash_tag|
+        yogy = Yogies.new
+        yogy.title = hash_tag
+        yogy.image_id = id
+        yogy.user_id = current_user.id
+        yogy.save!
+        will_be_added_yogy_ids << yogy.id
+      end
+
+      ## 삭제될 tag 처리
+      Yogies.delete( will_be_deleted_yogy_ids )
+
+      ## Images.yogy_ids 처리
+      yogy_ids = (tag_to_yogyid_map.values - will_be_deleted_yogy_ids + will_be_added_yogy_ids).map(&:inspect).join(',')
+      self.yogy_ids = yogy_ids
+      self.yogies = yogies
+      save!
     end
   end
 

@@ -4,7 +4,7 @@ class ImagesController < ApplicationController
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TextHelper
 
-  before_action :authenticate_user!, only: [:new, :create, :destroy, :ajax_save_description,
+  before_action :authenticate_user!, only: [:new, :create, :destroy, :ajax_save_yogies, :ajax_save_description,
                                             :image_like, :image_dislike, :image_cancel_like, :image_cancel_dislike,]
   before_action :showable!, only: [:show, ]
 
@@ -104,6 +104,27 @@ class ImagesController < ApplicationController
       is_success: is_success,
       html: html,
       next_offset: next_offset
+    }
+  end
+
+  def ajax_save_yogies
+    is_success = true
+    begin
+      image = Image.find_by_id params[:id]
+      if image.nil?
+        is_success = false
+      else
+        yogies = params[:field_yogies]
+        unless image.yogies == yogies
+          image.update_yogies!( current_user, yogies )
+        end
+      end
+    rescue => e
+      is_success = false
+    end
+
+    render :json => {
+      is_success: is_success
     }
   end
 
