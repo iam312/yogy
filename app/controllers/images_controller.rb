@@ -109,6 +109,7 @@ class ImagesController < ApplicationController
 
   def ajax_save_yogies
     is_success = true
+    updated_yogies_html = ""
     begin
       image = Image.find_by_id params[:id]
       if image.nil?
@@ -117,6 +118,7 @@ class ImagesController < ApplicationController
         yogies = params[:field_yogies]
         unless image.yogies == yogies
           image.update_yogies!( current_user, yogies )
+          updated_yogies_html = link_yogies_with_picture_count( image )
         end
       end
     rescue => e
@@ -124,7 +126,8 @@ class ImagesController < ApplicationController
     end
 
     render :json => {
-      is_success: is_success
+      is_success: is_success,
+      html: updated_yogies_html,
     }
   end
 

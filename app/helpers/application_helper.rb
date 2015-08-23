@@ -46,9 +46,10 @@ module ApplicationHelper
     result
   end
 
-  def link_yogies_with_picture_count( yogies )
+  def link_yogies_with_picture_count( image )
+    yogies = image.yogies_with_picture_count
     result = "<div id='yogies'>"
-    if not current_user.nil? and current_user.id == @image.user_id
+    if not current_user.nil? and current_user.id == image.user_id
       result += '<span id="modify_yogy" class="glyphicon glyphicon-pencil yogy_tone"></span>'
     end
 

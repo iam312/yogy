@@ -52,9 +52,9 @@
   <br />
   <span id="yogies_edit" class="hidden">
     <span id="save_yogy" class="glyphicon glyphicon-ok yogy_tone"></span>
-    <h3 id='yogies_editor'><%= text_field_tag 'field_yogies', @image.yogies %></h3>
+    <h3 id='yogies_editor'><%= text_field_tag 'field_yogies', @image.yogies, style: "width:100%" %></h3>
   </span>
-  <%= raw link_yogies_with_picture_count(@image.yogies_with_picture_count) %>
+  <%= raw link_yogies_with_picture_count( @image ) %>
   <h5 class="text-right"><%= link_to @image.user.name, image_filter_by_user_path( @image.user.id ) %>님이 <%= @image.created_at %>에 등록했습니다.
   <% if not current_user.nil? and current_user.id == @image.user_id %>
     <span id="remove" class="glyphicon glyphicon-trash yogy_tone"></span>
@@ -164,12 +164,14 @@ $(document).ajaxSend(function(e, xhr, options) {
 function ajax_save_yogies() {
   var jqxhr = $.post( "<%= image_save_yogies_path(@image) %>", $( "#field_yogies" ).serialize(),
   function( result ) {
-    //alert( "success" );
     if ( result["is_success"] == true ) {
-      // text santinize 처리. 단지 보기 용도일 뿐이다.
-      var toBeDisplayed = $("#desc").text($("#desc").val());
-      $("#readonly_desc").html( toBeDisplayed.html().replace(/\n/g,"<br>") );
+      $("#yogies").html( $(result["html"]).html() );
       toggle_edit_yogies();
+
+      // html을 바꿔치기 하면 event handler가 날아가서 click 이벤트를 다시 연결한다.
+      $("#modify_yogy").on('click', function(e){
+        toggle_edit_yogies();
+      });
     }
   })
   .done(function() {
@@ -242,6 +244,12 @@ function toggle_edit_desc() {
 $("#modify_yogy").click( function(e) {
   toggle_edit_yogies();
 } );
+
+$("#field_yogies").keyup(function(event){
+  if(event.keyCode == 13){
+    $("#save_yogy").click();
+  }
+});
 
 $("#modify_description").click( function(e) {
   toggle_edit_desc();
