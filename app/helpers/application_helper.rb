@@ -61,7 +61,7 @@ module ApplicationHelper
       result += "<sup><span class='badge'>#{extra[:count] - 1}</span></sup> " if extra[:count] > 1
       seasons = ""
       extra[:seasons].each_with_index do |season, idx|
-        seasons += link_season_text( season - 1 )
+        seasons += link_season_text( season )
         seasons += ", " if idx + 1 < extra[:seasons].size
       end
       result += "<small>#{seasons} | </small>" unless seasons.blank?

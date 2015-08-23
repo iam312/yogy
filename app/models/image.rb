@@ -24,7 +24,7 @@ class Image < ActiveRecord::Base
       yogy_records = Yogies.where( title: yogy )
       years = []
       seasons = []
-      images = Image.where( id: yogy_records.map{ |y| y.image_id } )
+      images = Image.where( id: yogy_records.map{ |y| y.image_id } ).where( "dislike < #{ENV["BLIND_LIMIT"]}" )
       images.each do |image|
         begin
           exif = JSON.parse( image.exif, :symbolize_names => true )
