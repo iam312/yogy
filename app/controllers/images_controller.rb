@@ -35,7 +35,7 @@ class ImagesController < ApplicationController
       render "new"
       return
     end
-    redirect_to image_path({id: @image.id }), notice: "The photo #{@image.title} has been uploaded."
+    redirect_to image_path( @image ), notice: "The photo #{@image.yogies} has been uploaded."
   end
 
   def destroy
