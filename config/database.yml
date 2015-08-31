@@ -7,7 +7,7 @@ development: &development
 
 test:
   <<: *development
-  database: yogy_test
+  database: <%= ENV["DB_NAME"] %>
 
 alpha: &alpha
   <<: *development
