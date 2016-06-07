@@ -1,0 +1,6 @@
+--ignore-dir
+log
+--ignore-dir
+tmp
+--ignore-file=is:tags
+--ignore-file=is:gems.tags
